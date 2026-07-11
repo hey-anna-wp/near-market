@@ -1,26 +1,62 @@
 @import "tailwindcss";
+@import "pretendard/dist/web/variable/pretendardvariable.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #6b8a58;
+  --color-primary-dark: #4f6843;
+  --color-primary-light: #edf3e9;
+
+  --color-secondary: #f4a261;
+  --color-secondary-light: #fff1e3;
+
+  --color-background: #f7f6f2;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #fafaf8;
+
+  --color-text-primary: #333333;
+  --color-text-secondary: #777777;
+  --color-text-disabled: #aaaaaa;
+
+  --color-border: #e6e6e6;
+  --color-border-strong: #d5d5d5;
+
+  --color-error: #e5484d;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  min-height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
