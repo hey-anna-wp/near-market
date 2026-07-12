@@ -70,4 +70,23 @@ export const mockProducts: Product[] = [
     createdAt: "2026-06-12T11:10:00",
     updatedAt: "2026-06-12T11:10:00",
   },
+  {
+    id: "5",
+    title:
+      "아이패드 에어 5세대 64GB 와이파이 모델 케이스 필름 포함 거의 새상품 아이패드 에어 5세대 64GB 와이파이 모델 케이스 필름 포함 거의 새상품",
+    description:
+      "집에서 영상 시청용으로만 사용했습니다. 케이스와 필름 부착되어 있고 전체적으로 깨끗합니다.",
+    price: 520000,
+    category: "디지털기기",
+    location: "창원시 성산구",
+    status: "selling",
+    imageUrl:
+      "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=800&auto=format&fit=crop",
+    sellerId: "user-1",
+    sellerName: "동네이웃",
+    likeCount: 18,
+    chatCount: 4,
+    createdAt: "2026-06-16T09:00:00",
+    updatedAt: "2026-06-16T09:00:00",
+  },
 ];
