@@ -1,0 +1,73 @@
+import type { Product } from "@/features/products/types/product";
+
+export const mockProducts: Product[] = [
+  {
+    id: "1",
+    title: "아이패드 에어 5세대 64GB",
+    description:
+      "집에서 영상 시청용으로만 사용했습니다. 케이스와 필름 부착되어 있고 전체적으로 깨끗합니다.",
+    price: 520000,
+    category: "디지털기기",
+    location: "창원시 성산구",
+    status: "selling",
+    imageUrl:
+      "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=800&auto=format&fit=crop",
+    sellerId: "user-1",
+    sellerName: "동네이웃",
+    likeCount: 18,
+    chatCount: 4,
+    createdAt: "2026-06-16T09:00:00",
+    updatedAt: "2026-06-16T09:00:00",
+  },
+  {
+    id: "2",
+    title: "원목 사이드 테이블",
+    description: "침대 옆에 두고 사용하기 좋은 원목 테이블입니다. 작은 생활 흠집은 있습니다.",
+    price: 35000,
+    category: "가구/인테리어",
+    location: "창원시 의창구",
+    status: "reserved",
+    imageUrl:
+      "https://images.unsplash.com/photo-1499933374294-4584851497cc?q=80&w=800&auto=format&fit=crop",
+    sellerId: "user-2",
+    sellerName: "마켓러버",
+    likeCount: 7,
+    chatCount: 2,
+    createdAt: "2026-06-15T18:30:00",
+    updatedAt: "2026-06-15T18:30:00",
+  },
+  {
+    id: "3",
+    title: "빈티지 데님 자켓",
+    description: "봄가을에 입기 좋은 데님 자켓입니다. 사이즈는 M 정도입니다.",
+    price: 28000,
+    category: "의류",
+    location: "창원시 마산회원구",
+    status: "selling",
+    imageUrl:
+      "https://images.unsplash.com/photo-1543076447-215ad9ba6923?q=80&w=800&auto=format&fit=crop",
+    sellerId: "user-3",
+    sellerName: "옷장정리중",
+    likeCount: 12,
+    chatCount: 1,
+    createdAt: "2026-06-14T13:20:00",
+    updatedAt: "2026-06-14T13:20:00",
+  },
+  {
+    id: "4",
+    title: "무선 키보드 마우스 세트",
+    description: "사무용으로 사용하던 무선 키보드와 마우스 세트입니다.",
+    price: 22000,
+    category: "디지털기기",
+    location: "창원시 진해구",
+    status: "sold",
+    imageUrl:
+      "https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=800&auto=format&fit=crop",
+    sellerId: "user-4",
+    sellerName: "정리합니다",
+    likeCount: 5,
+    chatCount: 3,
+    createdAt: "2026-06-12T11:10:00",
+    updatedAt: "2026-06-12T11:10:00",
+  },
+];
