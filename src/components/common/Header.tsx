@@ -4,6 +4,21 @@ import Link from "next/link";
 import { Bell, ChevronDown, CircleHelp, Menu, Search, X } from "lucide-react";
 import { useState } from "react";
 
+const headerMenus = [
+  {
+    href: "/products",
+    label: "상품",
+  },
+  {
+    href: "/likes",
+    label: "관심",
+  },
+  {
+    href: "/mypage",
+    label: "마이페이지",
+  },
+];
+
 export default function Header() {
   const [isGuideOpen, setIsGuideOpen] = useState(false);
 
@@ -15,16 +30,29 @@ export default function Header() {
     <>
       <header className="sticky top-0 z-40 border-b border-[#E6E6E6] bg-[#F7F6F2]/95 backdrop-blur">
         <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center justify-between px-5 md:px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#6B8A58] text-sm font-bold text-white">
-              N
-            </div>
+          <div className="flex items-center gap-8">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#6B8A58] text-sm font-bold text-white">
+                N
+              </div>
 
-            <span className="text-[22px] font-bold tracking-[-0.03em] text-[#3F5038]">
-              Near Market
-            </span>
-          </Link>
+              <span className="text-[22px] font-bold tracking-[-0.03em] text-[#3F5038]">
+                Near Market
+              </span>
+            </Link>
 
+            <nav className="hidden items-center gap-5 lg:flex">
+              {headerMenus.map((menu) => (
+                <Link
+                  key={menu.href}
+                  href={menu.href}
+                  className="text-sm font-semibold text-[#555555] transition hover:text-[#4F6843]"
+                >
+                  {menu.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
           <div className="hidden flex-1 items-center justify-center px-8 md:flex">
             <div className="flex h-11 w-full max-w-md items-center gap-2 rounded-full border border-[#E6E6E6] bg-white px-4">
               <Search size={18} className="text-[#777777]" />
@@ -72,7 +100,8 @@ export default function Header() {
 
           <button
             type="button"
-            aria-label="메뉴"
+            aria-label="사이트 안내"
+            onClick={() => setIsGuideOpen(true)}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E6E6E6] bg-white text-[#333333] md:hidden"
           >
             <Menu size={20} />
