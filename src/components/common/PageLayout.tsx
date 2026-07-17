@@ -6,12 +6,14 @@ type PageLayoutProps = {
   children: ReactNode;
   maxWidth?: "max-w-[960px]" | "max-w-[1200px]";
   className?: string;
+  showBottomNavigation?: boolean;
 };
 
 export default function PageLayout({
   children,
   maxWidth = "max-w-[1200px]",
   className = "",
+  showBottomNavigation = true,
 }: PageLayoutProps) {
   return (
     <div className="min-h-screen bg-[#F7F6F2] pb-20 md:pb-0">
@@ -21,7 +23,7 @@ export default function PageLayout({
         {children}
       </main>
 
-      <BottomNavigation />
+      {showBottomNavigation && <BottomNavigation />}
     </div>
   );
 }
