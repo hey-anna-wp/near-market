@@ -8,12 +8,8 @@ import BottomNavigation from "@/components/common/BottomNavigation";
 import EmptyState from "@/components/common/EmptyState";
 import ProductCard from "@/components/product/ProductCard";
 import type { ProductStatus } from "@/features/products/types/product";
+import { mockUser } from "@/mocks/user";
 import { mockProducts } from "@/mocks/products";
-
-const mockUser = {
-  id: "user-1",
-  nickname: "동네이웃",
-};
 
 const statusOptions = [
   {

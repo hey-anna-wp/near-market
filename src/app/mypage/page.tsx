@@ -13,14 +13,8 @@ import {
 import Header from "@/components/common/Header";
 import BottomNavigation from "@/components/common/BottomNavigation";
 import ProductCard from "@/components/product/ProductCard";
+import { mockUser } from "@/mocks/user";
 import { mockProducts } from "@/mocks/products";
-
-const mockUser = {
-  id: "user-1",
-  nickname: "동네이웃",
-  location: "창원시 성산구",
-  email: "near-market@example.com",
-};
 
 const menuItems = [
   {
