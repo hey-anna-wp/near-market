@@ -2,19 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Heart, MessageCircle } from "lucide-react";
 import type { Product } from "@/features/products/types/product";
+import { formatPrice } from "@/lib/format";
 import ProductStatusBadge from "./ProductStatusBadge";
 
-// type ProductCardProps = {
-//   product: Product;
-// };
 type ProductCardProps = {
   product: Product;
   showLikeButton?: boolean;
 };
-
-function formatPrice(price: number) {
-  return new Intl.NumberFormat("ko-KR").format(price);
-}
 
 export default function ProductCard({ product, showLikeButton = true }: ProductCardProps) {
   return (
@@ -34,14 +28,6 @@ export default function ProductCard({ product, showLikeButton = true }: ProductC
         <div className="absolute top-3 left-3">
           <ProductStatusBadge status={product.status} />
         </div>
-
-        {/* <button
-          type="button"
-          aria-label="관심 상품"
-          className="absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#777777] shadow-sm backdrop-blur transition hover:text-[#E5484D]"
-        >
-          <Heart size={18} />
-        </button> */}
 
         {showLikeButton && (
           <button

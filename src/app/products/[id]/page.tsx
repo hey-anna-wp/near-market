@@ -18,24 +18,13 @@ import BottomNavigation from "@/components/common/BottomNavigation";
 import ProductCard from "@/components/product/ProductCard";
 import ProductStatusBadge from "@/components/product/ProductStatusBadge";
 import { mockProducts } from "@/mocks/products";
+import { formatDate, formatPrice } from "@/lib/format";
 
 type ProductDetailPageProps = {
   params: Promise<{
     id: string;
   }>;
 };
-
-function formatPrice(price: number) {
-  return new Intl.NumberFormat("ko-KR").format(price);
-}
-
-function formatDate(date: string) {
-  return new Intl.DateTimeFormat("ko-KR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(new Date(date));
-}
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
   const { id } = await params;
