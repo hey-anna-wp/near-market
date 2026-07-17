@@ -7,6 +7,7 @@ import EmptyState from "@/components/common/EmptyState";
 import ProductCard from "@/components/product/ProductCard";
 import { mockProducts } from "@/mocks/products";
 import PageLayout from "@/components/common/PageLayout";
+import SectionHeader from "@/components/common/SectionHeader";
 
 const initialLikedProductIds = ["1", "2", "3"];
 
@@ -57,26 +58,22 @@ export default function LikesPage() {
       </section>
 
       <section className="mt-6 rounded-[24px] border border-[#E6E6E6] bg-white p-4 md:p-5">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h2 className="text-lg font-bold tracking-[-0.02em] text-[#333333]">관심 상품 목록</h2>
-
-            <p className="mt-1 text-sm text-[#777777]">
-              관심 상품은 로그인 후 계정에 저장되도록 연결할 예정입니다.
-            </p>
-          </div>
-
-          {likedProducts.length > 0 && (
-            <button
-              type="button"
-              onClick={handleClearLikes}
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-full border border-[#F3C1C3] bg-white px-4 text-sm font-semibold text-[#E5484D] transition hover:bg-[#FFF5F5]"
-            >
-              <Trash2 size={16} />
-              전체 비우기
-            </button>
-          )}
-        </div>
+        <SectionHeader
+          title="관심 상품 목록"
+          description="관심 상품은 로그인 후 계정에 저장되도록 연결할 예정입니다."
+          action={
+            likedProducts.length > 0 && (
+              <button
+                type="button"
+                onClick={handleClearLikes}
+                className="inline-flex h-10 items-center justify-center gap-2 rounded-full border border-[#F3C1C3] bg-white px-4 text-sm font-semibold text-[#E5484D] transition hover:bg-[#FFF5F5]"
+              >
+                <Trash2 size={16} />
+                전체 비우기
+              </button>
+            )
+          }
+        />
       </section>
 
       <section className="mt-6">

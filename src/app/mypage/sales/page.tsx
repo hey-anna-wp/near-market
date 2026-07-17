@@ -9,6 +9,7 @@ import type { ProductStatus } from "@/features/products/types/product";
 import { mockUser } from "@/mocks/user";
 import { mockProducts } from "@/mocks/products";
 import PageLayout from "@/components/common/PageLayout";
+import SectionHeader from "@/components/common/SectionHeader";
 
 const statusOptions = [
   {
@@ -239,18 +240,13 @@ export default function MySalesPage() {
       </section>
 
       <section className="mt-8">
-        <div className="mb-4 flex items-center justify-between">
-          <div>
-            <h2 className="text-xl font-bold tracking-[-0.02em] text-[#333333]">판매글 목록</h2>
-
-            <p className="mt-1 text-sm text-[#777777]">
-              총 {filteredProducts.length}개의 판매글이 있어요.
-            </p>
-          </div>
-        </div>
+        <SectionHeader
+          title="판매글 목록"
+          description={`총 ${filteredProducts.length}개의 판매글이 있어요.`}
+        />
 
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {filteredProducts.map((product) => (
               <div key={product.id} className="rounded-[24px] border border-[#E6E6E6] bg-white p-3">
                 <ProductCard product={product} />

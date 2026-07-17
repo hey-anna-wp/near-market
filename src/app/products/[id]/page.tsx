@@ -18,6 +18,7 @@ import ProductStatusBadge from "@/components/product/ProductStatusBadge";
 import { mockProducts } from "@/mocks/products";
 import { formatDate, formatPrice } from "@/lib/format";
 import PageLayout from "@/components/common/PageLayout";
+import SectionHeader from "@/components/common/SectionHeader";
 
 type ProductDetailPageProps = {
   params: Promise<{
@@ -163,26 +164,17 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
       </section>
 
       <section className="mt-6 rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:mt-8 md:p-7">
-        <h2 className="text-lg font-bold tracking-[-0.02em] text-[#333333]">상품 설명</h2>
-
-        <p className="mt-4 text-sm leading-7 whitespace-pre-line text-[#555555] md:text-base md:leading-8">
+        <SectionHeader title="상품 설명" />
+        <p className="mt-2 text-sm leading-7 whitespace-pre-line text-[#555555] md:text-base md:leading-8">
           {product.description}
         </p>
       </section>
 
       <section className="mt-6 rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:mt-8 md:p-7">
-        <div className="flex items-center justify-between gap-4">
-          <div>
-            <h2 className="text-lg font-bold tracking-[-0.02em] text-[#333333]">
-              판매자 관리 영역
-            </h2>
-
-            <p className="mt-2 text-sm leading-6 text-[#777777]">
-              로그인 후 본인이 등록한 상품일 경우 수정, 삭제, 거래 상태 변경 버튼을 노출할
-              예정입니다.
-            </p>
-          </div>
-        </div>
+        <SectionHeader
+          title="판매자 관리 영역"
+          description="로그인 후 본인이 등록한 상품일 경우 수정, 삭제, 거래 상태 변경 버튼을 노출할 예정입니다."
+        />
 
         <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-3">
           <Link
@@ -212,14 +204,12 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
       {relatedProducts.length > 0 && (
         <section className="mt-8 md:mt-12">
-          <div className="mb-4">
-            <h2 className="text-xl font-bold tracking-[-0.02em] text-[#333333]">비슷한 상품</h2>
-            <p className="mt-1 text-sm text-[#777777]">
-              같은 동네에서 올라온 다른 상품도 확인해보세요.
-            </p>
-          </div>
+          <SectionHeader
+            title="비슷한 상품"
+            description="같은 동네에서 올라온 다른 상품도 확인해보세요."
+          />
 
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+          <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
             {relatedProducts.map((item) => (
               <ProductCard key={item.id} product={item} />
             ))}

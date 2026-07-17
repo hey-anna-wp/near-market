@@ -10,6 +10,7 @@ import ProductCard from "@/components/product/ProductCard";
 import { categories } from "@/constants/categories";
 import { mockProducts } from "@/mocks/products";
 import type { ProductStatus } from "@/features/products/types/product";
+import SectionHeader from "@/components/common/SectionHeader";
 
 const statusOptions = [
   {
@@ -216,28 +217,24 @@ export default function ProductsPage() {
         </section>
 
         <section className="mt-8">
-          <div className="mb-4 flex items-center justify-between">
-            <div>
-              <h2 className="text-xl font-bold tracking-[-0.02em] text-[#333333]">상품 목록</h2>
-
-              <p className="mt-1 text-sm text-[#777777]">
-                총 {filteredProducts.length}개의 상품이 있어요.
-              </p>
-            </div>
-
-            {hasFilter && (
-              <button
-                type="button"
-                onClick={resetFilters}
-                className="rounded-full border border-[#D5D5D5] bg-white px-4 py-2 text-sm font-semibold text-[#555555] transition hover:bg-[#FAFAF8]"
-              >
-                초기화
-              </button>
-            )}
-          </div>
+          <SectionHeader
+            title="상품 목록"
+            description={`총 ${filteredProducts.length}개의 상품이 있어요.`}
+            action={
+              hasFilter && (
+                <button
+                  type="button"
+                  onClick={resetFilters}
+                  className="rounded-full border border-[#D5D5D5] bg-white px-4 py-2 text-sm font-semibold text-[#555555] transition hover:bg-[#FAFAF8]"
+                >
+                  초기화
+                </button>
+              )
+            }
+          />
 
           {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+            <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}

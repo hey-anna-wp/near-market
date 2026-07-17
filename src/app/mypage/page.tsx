@@ -14,6 +14,7 @@ import ProductCard from "@/components/product/ProductCard";
 import { mockUser } from "@/mocks/user";
 import { mockProducts } from "@/mocks/products";
 import PageLayout from "@/components/common/PageLayout";
+import SectionHeader from "@/components/common/SectionHeader";
 
 const menuItems = [
   {
@@ -97,15 +98,10 @@ export default function MyPage() {
       </section>
 
       <section className="mt-6 rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-lg font-bold tracking-[-0.02em] text-[#333333]">내 거래 활동</h2>
-
-            <p className="mt-1 text-sm text-[#777777]">
-              판매글, 관심 상품, 계정 정보를 관리할 수 있어요.
-            </p>
-          </div>
-        </div>
+        <SectionHeader
+          title="내 거래 활동"
+          description="판매글, 관심 상품, 계정 정보를 관리할 수 있어요."
+        />
 
         <div className="mt-5 divide-y divide-[#F0F0F0]">
           {menuItems.map((item) => {
@@ -134,18 +130,15 @@ export default function MyPage() {
       </section>
 
       <section className="mt-6 rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-lg font-bold tracking-[-0.02em] text-[#333333]">내 판매글</h2>
-
-            <p className="mt-1 text-sm text-[#777777]">내가 등록한 상품을 확인해보세요.</p>
-          </div>
-
-          <Link href="/mypage/sales" className="text-sm font-semibold text-[#4F6843]">
-            전체보기
-          </Link>
-        </div>
-
+        <SectionHeader
+          title="내 판매글"
+          description="내가 등록한 상품을 확인해보세요."
+          action={
+            <Link href="/mypage/sales" className="text-sm font-semibold text-[#4F6843]">
+              전체보기
+            </Link>
+          }
+        />
         {myProducts.length > 0 ? (
           <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
             {myProducts.map((product) => (
@@ -175,7 +168,7 @@ export default function MyPage() {
       </section>
 
       <section className="mt-6 rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
-        <h2 className="text-lg font-bold tracking-[-0.02em] text-[#333333]">계정 안내</h2>
+        <SectionHeader title="계정 안내" />
 
         <div className="mt-4 rounded-2xl bg-[#FAFAF8] p-4">
           <p className="text-sm font-semibold text-[#333333]">현재는 더미 로그인 상태입니다.</p>

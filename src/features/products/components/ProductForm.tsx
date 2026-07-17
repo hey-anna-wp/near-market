@@ -13,6 +13,7 @@ import type {
   ProductFormValues,
 } from "@/features/products/types/product-form";
 import { validateProductForm } from "@/features/products/utils/validate-product-form";
+import SectionHeader from "@/components/common/SectionHeader";
 
 type ProductFormProps = {
   mode: ProductFormMode;
@@ -200,19 +201,15 @@ export default function ProductForm({
   return (
     <form onSubmit={handleSubmit} className="mt-6 space-y-5">
       <section className="rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-lg font-bold tracking-[-0.02em] text-[#333333]">상품 이미지</h2>
-
-            <p className="mt-1 text-sm text-[#777777]">
-              {isEditMode
-                ? "기존 이미지를 유지하거나 새 이미지로 변경할 수 있어요."
-                : "대표 이미지를 등록해주세요."}
-            </p>
-          </div>
-
-          <Camera size={22} className="text-[#6B8A58]" />
-        </div>
+        <SectionHeader
+          title="상품 이미지"
+          description={
+            isEditMode
+              ? "기존 이미지를 유지하거나 새 이미지로 변경할 수 있어요."
+              : "대표 이미지를 등록해주세요."
+          }
+          action={<Camera size={22} className="text-[#6B8A58]" />}
+        />
 
         <div className="mt-5">
           {imagePreview ? (
@@ -274,7 +271,7 @@ export default function ProductForm({
       </section>
 
       <section className="rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
-        <h2 className="text-lg font-bold tracking-[-0.02em] text-[#333333]">상품 정보</h2>
+        <SectionHeader title="상품 정보" />
 
         <div className="mt-5 space-y-5">
           <div>
@@ -428,9 +425,7 @@ export default function ProductForm({
       </section>
 
       <section className="rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
-        <h2 className="text-lg font-bold tracking-[-0.02em] text-[#333333]">
-          {isEditMode ? "수정 전 확인" : "등록 전 확인"}
-        </h2>
+        <SectionHeader title={isEditMode ? "수정 전 확인" : "등록 전 확인"} />
 
         <ul className="mt-4 space-y-2 text-sm leading-6 text-[#777777]">
           <li>• 실제 상품 사진을 등록해주세요.</li>
