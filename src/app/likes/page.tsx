@@ -8,6 +8,8 @@ import ProductCard from "@/components/product/ProductCard";
 import { mockProducts } from "@/mocks/products";
 import PageLayout from "@/components/common/PageLayout";
 import SectionHeader from "@/components/common/SectionHeader";
+import HeroCard from "@/components/common/HeroCard";
+import PageTitle from "@/components/common/PageTitle";
 
 const initialLikedProductIds = ["1", "2", "3"];
 
@@ -32,31 +34,32 @@ export default function LikesPage() {
 
   return (
     <PageLayout>
-      <section className="overflow-hidden rounded-[28px] bg-[#EDF3E9] px-6 py-7 md:px-8 md:py-9">
-        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#4F6843]">
-              <Heart size={14} />
-              관심 상품
-            </div>
-
-            <h1 className="mt-4 text-[28px] leading-9 font-bold tracking-[-0.04em] text-[#333333] md:text-[36px] md:leading-[46px]">
-              관심 있는 상품을
-              <br className="md:hidden" /> 모아봤어요
-            </h1>
-
-            <p className="mt-3 text-sm leading-6 text-[#66715F]">
-              나중에 다시 보고 싶은 상품을 한곳에서 확인할 수 있습니다.
-            </p>
-          </div>
-
+      <HeroCard
+        variant="green"
+        className="overflow-hidden"
+        aside={
           <div className="rounded-2xl bg-white px-5 py-4 shadow-[0_10px_30px_rgba(79,104,67,0.08)]">
             <p className="text-xs font-semibold text-[#777777]">현재 관심 상품</p>
             <p className="mt-1 text-2xl font-bold text-[#4F6843]">{likedProducts.length}개</p>
           </div>
-        </div>
-      </section>
-
+        }
+      >
+        <PageTitle
+          badge={
+            <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#4F6843]">
+              <Heart size={14} />
+              관심 상품
+            </div>
+          }
+          title={
+            <>
+              관심 있는 상품을
+              <br className="md:hidden" /> 모아봤어요
+            </>
+          }
+          description="나중에 다시 보고 싶은 상품을 한곳에서 확인할 수 있습니다."
+        />
+      </HeroCard>
       <section className="mt-6 rounded-[24px] border border-[#E6E6E6] bg-white p-4 md:p-5">
         <SectionHeader
           title="관심 상품 목록"

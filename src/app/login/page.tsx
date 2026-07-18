@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ArrowLeft, Eye, EyeOff, Lock, Mail, MapPin, ShieldCheck, UserPlus } from "lucide-react";
 import PageLayout from "@/components/common/PageLayout";
+import PageTitle from "@/components/common/PageTitle";
 
 type LoginFormValues = {
   email: string;
@@ -134,21 +135,17 @@ export default function LoginPage() {
       </section>
 
       <section className="rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-8">
-        <div>
-          <p className="text-sm font-semibold text-[#6B8A58]">
-            {isSignupMode ? "Create Account" : "Welcome Back"}
-          </p>
-
-          <h2 className="mt-2 text-[28px] leading-9 font-bold tracking-[-0.04em] text-[#333333] md:text-[34px] md:leading-[44px]">
-            {isSignupMode ? "회원가입" : "로그인"}
-          </h2>
-
-          <p className="mt-3 text-sm leading-6 text-[#777777]">
-            {isSignupMode
+        <PageTitle
+          eyebrow={isSignupMode ? "Create Account" : "Welcome Back"}
+          title={isSignupMode ? "회원가입" : "로그인"}
+          description={
+            isSignupMode
               ? "이메일과 비밀번호로 새 계정을 생성합니다."
-              : "이메일과 비밀번호를 입력해 로그인합니다."}
-          </p>
-        </div>
+              : "이메일과 비밀번호를 입력해 로그인합니다."
+          }
+          size="compact"
+          descriptionClassName="text-[#777777]"
+        />
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-5">
           <div>

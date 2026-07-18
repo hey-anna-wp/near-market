@@ -8,6 +8,8 @@ import ProductForm from "@/features/products/components/ProductForm";
 import type { ProductFormSubmitValues } from "@/features/products/types/product-form";
 import { mockProducts } from "@/mocks/products";
 import PageLayout from "@/components/common/PageLayout";
+import HeroCard from "@/components/common/HeroCard";
+import PageTitle from "@/components/common/PageTitle";
 
 export default function ProductEditPage() {
   const params = useParams<{ id: string }>();
@@ -68,26 +70,26 @@ export default function ProductEditPage() {
         </Link>
       </div>
 
-      <section className="rounded-[28px] bg-[#EDF3E9] px-6 py-7 md:px-8 md:py-9">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="text-sm font-semibold text-[#4F6843]">Edit Product</p>
-
-            <h1 className="mt-2 text-[28px] leading-9 font-bold tracking-[-0.04em] text-[#333333] md:text-[36px] md:leading-[46px]">
-              판매글 정보를
-              <br className="md:hidden" /> 수정해보세요
-            </h1>
-
-            <p className="mt-3 text-sm leading-6 text-[#66715F]">
-              상품 정보, 가격, 거래 상태를 변경할 수 있습니다.
-            </p>
-          </div>
-
+      <HeroCard
+        variant="green"
+        align="start"
+        aside={
           <div className="hidden md:block">
             <ProductStatusBadge status={product.status} />
           </div>
-        </div>
-      </section>
+        }
+      >
+        <PageTitle
+          eyebrow="Edit Product"
+          title={
+            <>
+              판매글 정보를
+              <br className="md:hidden" /> 수정해보세요
+            </>
+          }
+          description="상품 정보, 가격, 거래 상태를 변경할 수 있습니다."
+        />
+      </HeroCard>
 
       <ProductForm
         mode="edit"

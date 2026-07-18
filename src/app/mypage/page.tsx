@@ -15,6 +15,8 @@ import { mockUser } from "@/mocks/user";
 import { mockProducts } from "@/mocks/products";
 import PageLayout from "@/components/common/PageLayout";
 import SectionHeader from "@/components/common/SectionHeader";
+import HeroCard from "@/components/common/HeroCard";
+import PageTitle from "@/components/common/PageTitle";
 
 const menuItems = [
   {
@@ -50,35 +52,36 @@ export default function MyPage() {
 
   return (
     <PageLayout>
-      <section className="overflow-hidden rounded-[28px] bg-[#EDF3E9] px-6 py-7 md:px-8 md:py-9">
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-4">
-            <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-white text-[#4F6843] shadow-[0_10px_30px_rgba(79,104,67,0.08)]">
-              <User size={34} />
-            </div>
-
-            <div>
-              <p className="text-sm font-semibold text-[#4F6843]">My Page</p>
-
-              <h1 className="mt-1 text-[28px] leading-9 font-bold tracking-[-0.04em] text-[#333333] md:text-[36px] md:leading-[46px]">
-                {mockUser.nickname}님
-              </h1>
-
-              <div className="mt-2 flex items-center gap-1 text-sm text-[#66715F]">
-                <MapPin size={16} />
-                <span>{mockUser.location}</span>
-              </div>
-            </div>
-          </div>
-
+      <HeroCard
+        variant="green"
+        className="overflow-hidden"
+        contentClassName="gap-6 md:items-center"
+        aside={
           <Link
             href="/login"
             className="inline-flex h-11 items-center justify-center rounded-full border border-[#D5D5D5] bg-white px-5 text-sm font-semibold text-[#333333] transition hover:bg-[#FAFAF8]"
           >
             프로필 수정
           </Link>
+        }
+      >
+        <div className="flex items-center gap-4">
+          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-white text-[#4F6843] shadow-[0_10px_30px_rgba(79,104,67,0.08)]">
+            <User size={34} />
+          </div>
+
+          <PageTitle
+            eyebrow="My Page"
+            title={`${mockUser.nickname}님`}
+            description={
+              <span className="inline-flex items-center gap-1">
+                <MapPin size={16} />
+                <span>{mockUser.location}</span>
+              </span>
+            }
+          />
         </div>
-      </section>
+      </HeroCard>
 
       <section className="mt-6 grid grid-cols-3 gap-3 md:gap-4">
         <div className="rounded-2xl border border-[#E6E6E6] bg-white p-4 text-center md:p-5">

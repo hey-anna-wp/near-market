@@ -10,6 +10,8 @@ import { mockUser } from "@/mocks/user";
 import { mockProducts } from "@/mocks/products";
 import PageLayout from "@/components/common/PageLayout";
 import SectionHeader from "@/components/common/SectionHeader";
+import HeroCard from "@/components/common/HeroCard";
+import PageTitle from "@/components/common/PageTitle";
 
 const statusOptions = [
   {
@@ -122,32 +124,34 @@ export default function MySalesPage() {
         </Link>
       </div>
 
-      <section className="overflow-hidden rounded-[28px] bg-[#EDF3E9] px-6 py-7 md:px-8 md:py-9">
-        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#4F6843]">
-              <Package size={14} />내 판매글
-            </div>
-
-            <h1 className="mt-4 text-[28px] leading-9 font-bold tracking-[-0.04em] text-[#333333] md:text-[36px] md:leading-[46px]">
-              내가 등록한 상품을
-              <br className="md:hidden" /> 관리해요
-            </h1>
-
-            <p className="mt-3 text-sm leading-6 text-[#66715F]">
-              상품 수정, 삭제, 거래 상태 변경은 Supabase 연동 후 실제 기능으로 연결할 예정입니다.
-            </p>
-          </div>
-
+      <HeroCard
+        variant="green"
+        className="overflow-hidden px-6 py-7 md:px-8 md:py-9"
+        aside={
           <Link
             href="/products/new"
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#6B8A58] px-6 text-sm font-semibold text-white transition hover:bg-[#4F6843]"
+            className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#6B8A58] px-6 text-sm font-semibold text-white transition hover:bg-[#4F6843] md:w-auto"
           >
             <Plus size={18} />
             상품 등록
           </Link>
-        </div>
-      </section>
+        }
+      >
+        <PageTitle
+          badge={
+            <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#4F6843]">
+              <Package size={14} />내 판매글
+            </div>
+          }
+          title={
+            <>
+              내가 등록한 상품을
+              <br className="md:hidden" /> 관리해요
+            </>
+          }
+          description="상품 수정, 삭제, 거래 상태 변경은 Supabase 연동 후 실제 기능으로 연결할 예정입니다."
+        />
+      </HeroCard>
 
       <section className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
         <div className="rounded-2xl border border-[#E6E6E6] bg-white p-4 md:p-5">
