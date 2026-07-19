@@ -97,18 +97,12 @@ export default function LikesPage() {
 
             <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
               {likedProducts.map((product) => (
-                <div key={product.id} className="relative">
-                  <ProductCard product={product} showLikeButton={false} />
-
-                  <button
-                    type="button"
-                    onClick={() => handleUnlike(product.id)}
-                    aria-label="관심 상품 해제"
-                    className="absolute top-9 right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-[#E5484D] text-white shadow-sm transition hover:bg-[#C9363B]"
-                  >
-                    <Heart size={18} fill="currentColor" />
-                  </button>
-                </div>
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  isLiked
+                  onLikeClick={handleUnlike}
+                />
               ))}
             </div>
           </>
