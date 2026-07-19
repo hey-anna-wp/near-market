@@ -12,6 +12,7 @@ import PageLayout from "@/components/common/PageLayout";
 import SectionHeader from "@/components/common/SectionHeader";
 import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
+import StatCard from "@/components/common/StatCard";
 
 const statusOptions = [
   {
@@ -154,25 +155,30 @@ export default function MySalesPage() {
       </HeroCard>
 
       <section className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-        <div className="rounded-2xl border border-[#E6E6E6] bg-white p-4 md:p-5">
-          <p className="text-xs font-semibold text-[#777777]">전체</p>
-          <p className="mt-2 text-2xl font-bold text-[#4F6843]">{myProducts.length}</p>
-        </div>
+        <StatCard label="전체" value={myProducts.length} align="left" valuePosition="bottom" />
 
-        <div className="rounded-2xl border border-[#E6E6E6] bg-white p-4 md:p-5">
-          <p className="text-xs font-semibold text-[#777777]">판매중</p>
-          <p className="mt-2 text-2xl font-bold text-[#4F6843]">{getStatusCount("selling")}</p>
-        </div>
+        <StatCard
+          label="판매중"
+          value={getStatusCount("selling")}
+          align="left"
+          valuePosition="bottom"
+        />
 
-        <div className="rounded-2xl border border-[#E6E6E6] bg-white p-4 md:p-5">
-          <p className="text-xs font-semibold text-[#777777]">예약중</p>
-          <p className="mt-2 text-2xl font-bold text-[#D7772F]">{getStatusCount("reserved")}</p>
-        </div>
+        <StatCard
+          label="예약중"
+          value={getStatusCount("reserved")}
+          align="left"
+          valuePosition="bottom"
+          valueClassName="text-[#D7772F]"
+        />
 
-        <div className="rounded-2xl border border-[#E6E6E6] bg-white p-4 md:p-5">
-          <p className="text-xs font-semibold text-[#777777]">거래완료</p>
-          <p className="mt-2 text-2xl font-bold text-[#777777]">{getStatusCount("sold")}</p>
-        </div>
+        <StatCard
+          label="거래완료"
+          value={getStatusCount("sold")}
+          align="left"
+          valuePosition="bottom"
+          valueClassName="text-[#777777]"
+        />
       </section>
 
       <section className="mt-6 rounded-[24px] border border-[#E6E6E6] bg-white p-4 md:p-5">

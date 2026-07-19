@@ -18,6 +18,7 @@ import SectionHeader from "@/components/common/SectionHeader";
 import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
 import SectionCard from "@/components/common/SectionCard";
+import StatCard from "@/components/common/StatCard";
 
 const menuItems = [
   {
@@ -85,20 +86,9 @@ export default function MyPage() {
       </HeroCard>
 
       <section className="mt-6 grid grid-cols-3 gap-3 md:gap-4">
-        <div className="rounded-2xl border border-[#E6E6E6] bg-white p-4 text-center md:p-5">
-          <p className="text-2xl font-bold text-[#4F6843]">{myProducts.length}</p>
-          <p className="mt-1 text-xs font-medium text-[#777777]">판매글</p>
-        </div>
-
-        <div className="rounded-2xl border border-[#E6E6E6] bg-white p-4 text-center md:p-5">
-          <p className="text-2xl font-bold text-[#4F6843]">{likedProducts.length}</p>
-          <p className="mt-1 text-xs font-medium text-[#777777]">관심 상품</p>
-        </div>
-
-        <div className="rounded-2xl border border-[#E6E6E6] bg-white p-4 text-center md:p-5">
-          <p className="text-2xl font-bold text-[#4F6843]">0</p>
-          <p className="mt-1 text-xs font-medium text-[#777777]">문의 내역</p>
-        </div>
+        <StatCard label="판매글" value={myProducts.length} />
+        <StatCard label="관심 상품" value={likedProducts.length} />
+        <StatCard label="문의 내역" value={0} />
       </section>
 
       <SectionCard>
