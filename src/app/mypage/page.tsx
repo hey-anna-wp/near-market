@@ -17,6 +17,7 @@ import PageLayout from "@/components/common/PageLayout";
 import SectionHeader from "@/components/common/SectionHeader";
 import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
+import SectionCard from "@/components/common/SectionCard";
 
 const menuItems = [
   {
@@ -100,7 +101,7 @@ export default function MyPage() {
         </div>
       </section>
 
-      <section className="mt-6 rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
+      <SectionCard>
         <SectionHeader
           title="내 거래 활동"
           description="판매글, 관심 상품, 계정 정보를 관리할 수 있어요."
@@ -130,9 +131,9 @@ export default function MyPage() {
             );
           })}
         </div>
-      </section>
+      </SectionCard>
 
-      <section className="mt-6 rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
+      <SectionCard>
         <SectionHeader
           title="내 판매글"
           description="내가 등록한 상품을 확인해보세요."
@@ -168,9 +169,9 @@ export default function MyPage() {
             </Link>
           </div>
         )}
-      </section>
+      </SectionCard>
 
-      <section className="mt-6 rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
+      <SectionCard>
         <SectionHeader title="계정 안내" />
 
         <div className="mt-4 rounded-2xl bg-[#FAFAF8] p-4">
@@ -189,7 +190,7 @@ export default function MyPage() {
           <LogOut size={17} />
           로그아웃
         </button>
-      </section>
+      </SectionCard>
     </PageLayout>
   );
 }

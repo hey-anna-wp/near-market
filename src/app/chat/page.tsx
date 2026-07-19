@@ -4,6 +4,7 @@ import PageLayout from "@/components/common/PageLayout";
 import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
 import SectionHeader from "@/components/common/SectionHeader";
+import SectionCard from "@/components/common/SectionCard";
 
 const plannedFeatures = [
   {
@@ -66,7 +67,7 @@ export default function ChatPage() {
         />
       </HeroCard>
 
-      <section className="mt-6 rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
+      <SectionCard>
         <SectionHeader title="확장 예정 기능" />
 
         <div className="mt-5 grid gap-3 md:grid-cols-3">
@@ -89,9 +90,9 @@ export default function ChatPage() {
             );
           })}
         </div>
-      </section>
+      </SectionCard>
 
-      <section className="mt-6 rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
+      <SectionCard>
         <SectionHeader title="현재 구현 범위" />
 
         <ul className="mt-4 space-y-2 text-sm leading-6 text-[#777777]">
@@ -100,7 +101,7 @@ export default function ChatPage() {
           <li>• 로그인 UI 구현</li>
           <li>• 채팅은 포트폴리오 확장 예정 기능으로 분리</li>
         </ul>
-      </section>
+      </SectionCard>
     </PageLayout>
   );
 }

@@ -10,6 +10,7 @@ import PageLayout from "@/components/common/PageLayout";
 import SectionHeader from "@/components/common/SectionHeader";
 import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
+import SectionCard from "@/components/common/SectionCard";
 
 const initialLikedProductIds = ["1", "2", "3"];
 
@@ -60,7 +61,8 @@ export default function LikesPage() {
           description="나중에 다시 보고 싶은 상품을 한곳에서 확인할 수 있습니다."
         />
       </HeroCard>
-      <section className="mt-6 rounded-[24px] border border-[#E6E6E6] bg-white p-4 md:p-5">
+
+      <SectionCard>
         <SectionHeader
           title="관심 상품 목록"
           description="관심 상품은 로그인 후 계정에 저장되도록 연결할 예정입니다."
@@ -77,7 +79,7 @@ export default function LikesPage() {
             )
           }
         />
-      </section>
+      </SectionCard>
 
       <section className="mt-6">
         {likedProducts.length > 0 ? (

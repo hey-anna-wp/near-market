@@ -14,6 +14,7 @@ import type {
 } from "@/features/products/types/product-form";
 import { validateProductForm } from "@/features/products/utils/validate-product-form";
 import SectionHeader from "@/components/common/SectionHeader";
+import SectionCard from "@/components/common/SectionCard";
 
 type ProductFormProps = {
   mode: ProductFormMode;
@@ -200,7 +201,7 @@ export default function ProductForm({
 
   return (
     <form onSubmit={handleSubmit} className="mt-6 space-y-5">
-      <section className="rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
+      <SectionCard>
         <SectionHeader
           title="상품 이미지"
           description={
@@ -268,9 +269,9 @@ export default function ProductForm({
 
           {errors.imageUrl && <p className="mt-2 text-sm text-[#E5484D]">{errors.imageUrl}</p>}
         </div>
-      </section>
+      </SectionCard>
 
-      <section className="rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
+      <SectionCard>
         <SectionHeader title="상품 정보" />
 
         <div className="mt-5 space-y-5">
@@ -422,9 +423,9 @@ export default function ProductForm({
             </div>
           </div>
         </div>
-      </section>
+      </SectionCard>
 
-      <section className="rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
+      <SectionCard>
         <SectionHeader title={isEditMode ? "수정 전 확인" : "등록 전 확인"} />
 
         <ul className="mt-4 space-y-2 text-sm leading-6 text-[#777777]">
@@ -437,9 +438,9 @@ export default function ProductForm({
             <li>• 등록 후 내 판매글에서 수정할 수 있습니다.</li>
           )}
         </ul>
-      </section>
+      </SectionCard>
 
-      <div className="sticky bottom-0 -mx-5 border-t border-[#E6E6E6] bg-white p-4 md:static md:mx-0 md:border-0 md:bg-transparent md:p-0">
+      <div className="sticky bottom-0 -mx-5 mt-6 border-t border-[#E6E6E6] bg-white p-4 md:static md:mx-0 md:border-0 md:bg-transparent md:p-0">
         <div className="mx-auto flex max-w-[960px] gap-3">
           {isEditMode && onDelete && (
             <button

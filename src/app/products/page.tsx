@@ -12,6 +12,7 @@ import SectionHeader from "@/components/common/SectionHeader";
 import PageLayout from "@/components/common/PageLayout";
 import PageTitle from "@/components/common/PageTitle";
 import HeroCard from "@/components/common/HeroCard";
+import SectionCard from "@/components/common/SectionCard";
 
 const statusOptions = [
   {
@@ -133,8 +134,7 @@ export default function ProductsPage() {
           descriptionClassName="text-[#777777]"
         />
       </HeroCard>
-
-      <section className="mt-5 rounded-[24px] border border-[#E6E6E6] bg-white p-4 md:p-5">
+      <SectionCard>
         <div className="flex items-center gap-2 text-sm font-semibold text-[#333333]">
           <SlidersHorizontal size={18} />
           필터
@@ -208,7 +208,7 @@ export default function ProductsPage() {
             </div>
           </div>
         </div>
-      </section>
+      </SectionCard>
 
       <section className="mt-8">
         <SectionHeader

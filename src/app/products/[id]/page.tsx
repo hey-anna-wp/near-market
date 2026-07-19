@@ -19,6 +19,7 @@ import { mockProducts } from "@/mocks/products";
 import { formatDate, formatPrice } from "@/lib/format";
 import PageLayout from "@/components/common/PageLayout";
 import SectionHeader from "@/components/common/SectionHeader";
+import SectionCard from "@/components/common/SectionCard";
 
 type ProductDetailPageProps = {
   params: Promise<{
@@ -163,14 +164,14 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         </div>
       </section>
 
-      <section className="mt-6 rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:mt-8 md:p-7">
+      <SectionCard>
         <SectionHeader title="상품 설명" />
         <p className="mt-2 text-sm leading-7 whitespace-pre-line text-[#555555] md:text-base md:leading-8">
           {product.description}
         </p>
-      </section>
+      </SectionCard>
 
-      <section className="mt-6 rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:mt-8 md:p-7">
+      <SectionCard>
         <SectionHeader
           title="판매자 관리 영역"
           description="로그인 후 본인이 등록한 상품일 경우 수정, 삭제, 거래 상태 변경 버튼을 노출할 예정입니다."
@@ -200,7 +201,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             삭제하기
           </button>
         </div>
-      </section>
+      </SectionCard>
 
       {relatedProducts.length > 0 && (
         <section className="mt-8 md:mt-12">
