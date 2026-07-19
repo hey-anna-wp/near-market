@@ -283,18 +283,15 @@ export default function MySalesPage() {
             ))}
           </div>
         ) : (
-          <div>
-            <EmptyState
-              title="판매글이 없어요"
-              description={
-                hasFilter
-                  ? "검색어나 거래 상태 필터를 초기화해서 다시 확인해보세요."
-                  : "아직 등록한 상품이 없습니다. 판매할 물건이 있다면 상품을 등록해보세요."
-              }
-            />
-
-            {!hasFilter && (
-              <div className="mt-5 flex justify-center">
+          <EmptyState
+            title="판매글이 없어요"
+            description={
+              hasFilter
+                ? "검색어나 거래 상태 필터를 초기화해서 다시 확인해보세요."
+                : "아직 등록한 상품이 없습니다. 판매할 물건이 있다면 상품을 등록해보세요."
+            }
+            action={
+              !hasFilter && (
                 <Link
                   href="/products/new"
                   className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#6B8A58] px-6 text-sm font-semibold text-white transition hover:bg-[#4F6843]"
@@ -302,9 +299,9 @@ export default function MySalesPage() {
                   <Plus size={18} />
                   상품 등록하기
                 </Link>
-              </div>
-            )}
-          </div>
+              )
+            }
+          />
         )}
       </section>
     </PageLayout>
