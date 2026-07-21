@@ -11,7 +11,7 @@ import SectionHeader from "@/components/common/SectionHeader";
 import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
 import SectionCard from "@/components/common/SectionCard";
-import LinkButton from "@/components/common/button/LinkButton";
+import { Button, LinkButton } from "@/components/common/button";
 
 const initialLikedProductIds = ["1", "2", "3"];
 
@@ -69,14 +69,10 @@ export default function LikesPage() {
           description="관심 상품은 로그인 후 계정에 저장되도록 연결할 예정입니다."
           action={
             likedProducts.length > 0 && (
-              <button
-                type="button"
-                onClick={handleClearLikes}
-                className="inline-flex h-10 items-center justify-center gap-2 rounded-full border border-[#F3C1C3] bg-white px-4 text-sm font-semibold text-[#E5484D] transition hover:bg-[#FFF5F5]"
-              >
+              <Button type="button" variant="dangerOutline" size="sm" onClick={handleClearLikes}>
                 <Trash2 size={16} />
                 전체 비우기
-              </button>
+              </Button>
             )
           }
         />

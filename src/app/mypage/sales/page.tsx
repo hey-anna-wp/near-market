@@ -13,7 +13,7 @@ import SectionHeader from "@/components/common/SectionHeader";
 import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
 import StatCard from "@/components/common/StatCard";
-import LinkButton from "@/components/common/button/LinkButton";
+import { Button, LinkButton } from "@/components/common/button";
 
 const statusOptions = [
   {
@@ -236,13 +236,9 @@ export default function MySalesPage() {
 
         {hasFilter && (
           <div className="mt-4 flex justify-end">
-            <button
-              type="button"
-              onClick={resetFilters}
-              className="rounded-full border border-[#D5D5D5] bg-white px-4 py-2 text-sm font-semibold text-[#555555] transition hover:bg-[#FAFAF8]"
-            >
+            <Button variant="outline" size="sm" onClick={resetFilters}>
               필터 초기화
-            </button>
+            </Button>
           </div>
         )}
       </section>
@@ -270,14 +266,15 @@ export default function MySalesPage() {
                     수정
                   </LinkButton>
 
-                  <button
-                    type="button"
+                  <Button
+                    variant="dangerOutline"
+                    radius="xl"
+                    fullWidth
                     onClick={() => handleDelete(product.title)}
-                    className="flex h-11 items-center justify-center gap-2 rounded-xl border border-[#F3C1C3] bg-white text-sm font-semibold text-[#E5484D] transition hover:bg-[#FFF5F5]"
                   >
                     <Trash2 size={17} />
                     삭제
-                  </button>
+                  </Button>
                 </div>
               </div>
             ))}

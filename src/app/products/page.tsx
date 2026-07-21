@@ -12,7 +12,7 @@ import PageLayout from "@/components/common/PageLayout";
 import PageTitle from "@/components/common/PageTitle";
 import HeroCard from "@/components/common/HeroCard";
 import SectionCard from "@/components/common/SectionCard";
-import LinkButton from "@/components/common/button/LinkButton";
+import { Button, LinkButton } from "@/components/common/button";
 
 const statusOptions = [
   {
@@ -209,13 +209,9 @@ export default function ProductsPage() {
           description={`총 ${filteredProducts.length}개의 상품이 있어요.`}
           action={
             hasFilter && (
-              <button
-                type="button"
-                onClick={resetFilters}
-                className="rounded-full border border-[#D5D5D5] bg-white px-4 py-2 text-sm font-semibold text-[#555555] transition hover:bg-[#FAFAF8]"
-              >
+              <Button variant="outline" size="sm" onClick={resetFilters}>
                 초기화
-              </button>
+              </Button>
             )
           }
         />

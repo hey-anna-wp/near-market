@@ -19,7 +19,7 @@ import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
 import SectionCard from "@/components/common/SectionCard";
 import StatCard from "@/components/common/StatCard";
-import LinkButton from "@/components/common/button/LinkButton";
+import { Button, LinkButton } from "@/components/common/button";
 
 const menuItems = [
   {
@@ -169,13 +169,10 @@ export default function MyPage() {
           </p>
         </div>
 
-        <button
-          type="button"
-          className="mt-4 inline-flex h-11 items-center justify-center gap-2 rounded-full border border-[#F3C1C3] bg-white px-5 text-sm font-semibold text-[#E5484D] transition hover:bg-[#FFF5F5]"
-        >
+        <Button variant="dangerOutline" className="mt-4">
           <LogOut size={17} />
           로그아웃
-        </button>
+        </Button>
       </SectionCard>
     </PageLayout>
   );

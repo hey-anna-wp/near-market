@@ -14,7 +14,7 @@ import type {
 import { validateProductForm } from "@/features/products/utils/validate-product-form";
 import SectionHeader from "@/components/common/SectionHeader";
 import SectionCard from "@/components/common/SectionCard";
-import LinkButton from "@/components/common/button/LinkButton";
+import { Button, LinkButton } from "@/components/common/button";
 
 type ProductFormProps = {
   mode: ProductFormMode;
@@ -443,15 +443,19 @@ export default function ProductForm({
       <div className="sticky bottom-0 -mx-5 mt-6 border-t border-[#E6E6E6] bg-white p-4 md:static md:mx-0 md:border-0 md:bg-transparent md:p-0">
         <div className="mx-auto flex max-w-[960px] gap-3">
           {isEditMode && onDelete && (
-            <button
+            <Button
               type="button"
+              variant="dangerOutline"
+              size="lg"
+              radius="2xl"
+              iconOnly
               onClick={onDelete}
               disabled={isSubmitting}
               aria-label="상품 삭제"
-              className="flex h-12 w-14 shrink-0 items-center justify-center rounded-2xl border border-[#F3C1C3] bg-white text-[#E5484D] transition hover:bg-[#FFF5F5] disabled:cursor-not-allowed disabled:opacity-50"
+              className="w-14 shrink-0"
             >
-              <Trash2 size={19} />
-            </button>
+              <Trash2 size={19} className="shrink-0" />
+            </Button>
           )}
 
           <LinkButton
@@ -464,15 +468,10 @@ export default function ProductForm({
             취소
           </LinkButton>
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="flex h-12 flex-1 items-center justify-center gap-2 rounded-2xl bg-[#6B8A58] text-sm font-semibold text-white transition hover:bg-[#4F6843] disabled:cursor-not-allowed disabled:opacity-60"
-          >
+          <Button type="submit" size="lg" radius="2xl" disabled={isSubmitting} className="flex-1">
             <Save size={18} />
-
             {submitButtonText}
-          </button>
+          </Button>
         </div>
       </div>
     </form>

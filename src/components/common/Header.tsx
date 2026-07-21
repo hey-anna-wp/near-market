@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Bell, ChevronDown, CircleHelp, Menu, Search, X } from "lucide-react";
 import { useState } from "react";
-import { LinkButton } from "@/components/common/button";
+import { Button, LinkButton } from "@/components/common/button";
 
 const headerMenus = [
   {
@@ -218,13 +218,9 @@ export default function Header() {
               </ul>
             </div>
 
-            <button
-              type="button"
-              onClick={closeGuide}
-              className="mt-7 w-full rounded-full bg-[#6B8A58] py-3.5 text-sm font-semibold text-white transition hover:bg-[#4F6843]"
-            >
+            <Button onClick={closeGuide} size="lg" fullWidth className="mt-7">
               확인했어요
-            </button>
+            </Button>
           </section>
         </div>
       )}

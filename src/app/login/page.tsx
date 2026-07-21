@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ArrowLeft, Eye, EyeOff, Lock, Mail, MapPin, ShieldCheck, UserPlus } from "lucide-react";
 import PageLayout from "@/components/common/PageLayout";
 import PageTitle from "@/components/common/PageTitle";
+import Button from "@/components/common/button/Button";
 
 type LoginFormValues = {
   email: string;
@@ -215,12 +216,9 @@ export default function LoginPage() {
             </div>
           )}
 
-          <button
-            type="submit"
-            className="flex h-12 w-full items-center justify-center rounded-2xl bg-[#6B8A58] text-sm font-semibold text-white transition hover:bg-[#4F6843]"
-          >
+          <Button type="submit" size="lg" radius="2xl" fullWidth>
             {isSignupMode ? "회원가입하기" : "로그인하기"}
-          </button>
+          </Button>
         </form>
 
         <div className="mt-6 rounded-2xl bg-[#FAFAF8] p-4">

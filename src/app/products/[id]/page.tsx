@@ -20,7 +20,7 @@ import { formatDate, formatPrice } from "@/lib/format";
 import PageLayout from "@/components/common/PageLayout";
 import SectionHeader from "@/components/common/SectionHeader";
 import SectionCard from "@/components/common/SectionCard";
-import LinkButton from "@/components/common/button/LinkButton";
+import { Button, LinkButton } from "@/components/common/button";
 
 type ProductDetailPageProps = {
   params: Promise<{
@@ -141,21 +141,15 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           </div>
 
           <div className="mt-6 hidden gap-3 md:flex">
-            <button
-              type="button"
-              className="flex h-13 flex-1 items-center justify-center gap-2 rounded-2xl border border-[#D5D5D5] bg-white text-sm font-semibold text-[#333333] transition hover:bg-[#FAFAF8]"
-            >
+            <Button variant="outline" size="lg" radius="2xl" className="h-13 flex-1">
               <Heart size={19} />
               관심
-            </button>
+            </Button>
 
-            <button
-              type="button"
-              className="flex h-13 flex-[1.4] items-center justify-center gap-2 rounded-2xl bg-[#6B8A58] text-sm font-semibold text-white transition hover:bg-[#4F6843]"
-            >
+            <Button radius="2xl" className="h-13 flex-[1.4]">
               <MessageCircle size={19} />
               문의하기
-            </button>
+            </Button>
           </div>
 
           <div className="mt-4 hidden rounded-2xl bg-[#FFF1E3] px-4 py-3 text-sm leading-6 text-[#9A5A23] md:block">
@@ -190,20 +184,14 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             수정하기
           </LinkButton>
 
-          <button
-            type="button"
-            className="flex h-12 items-center justify-center rounded-xl border border-[#D5D5D5] bg-white text-sm font-semibold text-[#333333] transition hover:bg-[#FAFAF8]"
-          >
+          <Button variant="outline" size="lg" radius="xl" fullWidth>
             거래 상태 변경
-          </button>
+          </Button>
 
-          <button
-            type="button"
-            className="flex h-12 items-center justify-center gap-2 rounded-xl border border-[#F3C1C3] bg-white text-sm font-semibold text-[#E5484D] transition hover:bg-[#FFF5F5]"
-          >
+          <Button variant="dangerOutline" size="lg" radius="xl" fullWidth>
             <Trash2 size={18} />
             삭제하기
-          </button>
+          </Button>
         </div>
       </SectionCard>
 
@@ -224,21 +212,21 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
       <div className="fixed right-0 bottom-0 left-0 z-50 border-t border-[#E6E6E6] bg-white p-4 md:hidden">
         <div className="mx-auto flex max-w-md gap-3">
-          <button
-            type="button"
+          <Button
+            variant="outline"
+            size="lg"
+            radius="2xl"
+            iconOnly
             aria-label="관심 상품"
-            className="flex h-12 w-14 items-center justify-center rounded-2xl border border-[#D5D5D5] bg-white text-[#777777]"
+            className="w-14 shrink-0"
           >
-            <Heart size={22} />
-          </button>
+            <Heart size={22} className="shrink-0" />
+          </Button>
 
-          <button
-            type="button"
-            className="flex h-12 flex-1 items-center justify-center gap-2 rounded-2xl bg-[#6B8A58] text-sm font-semibold text-white"
-          >
+          <Button size="lg" radius="2xl" className="flex-1">
             <MessageCircle size={19} />
             문의하기
-          </button>
+          </Button>
         </div>
       </div>
     </PageLayout>
