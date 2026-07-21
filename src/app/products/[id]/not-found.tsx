@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { ArrowLeft, SearchX } from "lucide-react";
 import PageLayout from "@/components/common/PageLayout";
+import LinkButton from "@/components/common/button/LinkButton";
 
 export default function ProductNotFoundPage() {
   return (
@@ -16,13 +16,10 @@ export default function ProductNotFoundPage() {
           삭제되었거나 존재하지 않는 상품입니다. 상품 목록에서 다른 상품을 확인해보세요.
         </p>
 
-        <Link
-          href="/products"
-          className="mt-6 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#6B8A58] px-6 text-sm font-semibold text-white transition hover:bg-[#4F6843]"
-        >
+        <LinkButton href="/products" className="mt-6">
           <ArrowLeft size={18} />
           상품 목록으로 이동
-        </Link>
+        </LinkButton>
       </div>
     </PageLayout>
   );

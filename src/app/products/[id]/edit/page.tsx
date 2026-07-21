@@ -10,6 +10,7 @@ import { mockProducts } from "@/mocks/products";
 import PageLayout from "@/components/common/PageLayout";
 import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
+import LinkButton from "@/components/common/button/LinkButton";
 
 export default function ProductEditPage() {
   const params = useParams<{ id: string }>();
@@ -26,12 +27,9 @@ export default function ProductEditPage() {
             삭제되었거나 존재하지 않는 상품입니다. 상품 목록에서 다시 확인해주세요.
           </p>
 
-          <Link
-            href="/products"
-            className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-[#6B8A58] px-6 text-sm font-semibold text-white transition hover:bg-[#4F6843]"
-          >
+          <LinkButton href="/products" size="lg" className="mt-6">
             상품 목록으로 이동
-          </Link>
+          </LinkButton>
         </div>
       </PageLayout>
     );

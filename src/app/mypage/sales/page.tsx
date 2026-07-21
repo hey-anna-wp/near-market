@@ -13,6 +13,7 @@ import SectionHeader from "@/components/common/SectionHeader";
 import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
 import StatCard from "@/components/common/StatCard";
+import LinkButton from "@/components/common/button/LinkButton";
 
 const statusOptions = [
   {
@@ -129,13 +130,10 @@ export default function MySalesPage() {
         variant="green"
         className="overflow-hidden px-6 py-7 md:px-8 md:py-9"
         aside={
-          <Link
-            href="/products/new"
-            className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#6B8A58] px-6 text-sm font-semibold text-white transition hover:bg-[#4F6843] md:w-auto"
-          >
+          <LinkButton href="/products/new" fullWidth className="md:w-auto">
             <Plus size={18} />
             상품 등록
-          </Link>
+          </LinkButton>
         }
       >
         <PageTitle
@@ -262,13 +260,15 @@ export default function MySalesPage() {
                 <ProductCard product={product} />
 
                 <div className="mt-3 grid grid-cols-2 gap-2">
-                  <Link
+                  <LinkButton
                     href={`/products/${product.id}/edit`}
-                    className="flex h-11 items-center justify-center gap-2 rounded-xl border border-[#D5D5D5] bg-white text-sm font-semibold text-[#333333] transition hover:bg-[#FAFAF8]"
+                    variant="outline"
+                    radius="xl"
+                    fullWidth
                   >
                     <Pencil size={17} />
                     수정
-                  </Link>
+                  </LinkButton>
 
                   <button
                     type="button"
@@ -292,13 +292,10 @@ export default function MySalesPage() {
             }
             action={
               !hasFilter && (
-                <Link
-                  href="/products/new"
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#6B8A58] px-6 text-sm font-semibold text-white transition hover:bg-[#4F6843]"
-                >
+                <LinkButton href="/products/new">
                   <Plus size={18} />
                   상품 등록하기
-                </Link>
+                </LinkButton>
               )
             }
           />

@@ -11,6 +11,7 @@ import SectionHeader from "@/components/common/SectionHeader";
 import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
 import SectionCard from "@/components/common/SectionCard";
+import LinkButton from "@/components/common/button/LinkButton";
 
 const initialLikedProductIds = ["1", "2", "3"];
 
@@ -113,13 +114,10 @@ export default function LikesPage() {
             title="관심 상품이 없어요"
             description="마음에 드는 상품을 관심 상품으로 저장하면 이곳에서 다시 확인할 수 있어요."
             action={
-              <Link
-                href="/products"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#6B8A58] px-6 text-sm font-semibold text-white transition hover:bg-[#4F6843]"
-              >
+              <LinkButton href="/products">
                 <ShoppingBag size={18} />
                 상품 둘러보기
-              </Link>
+              </LinkButton>
             }
           />
         )}

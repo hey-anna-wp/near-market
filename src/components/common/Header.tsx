@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Bell, ChevronDown, CircleHelp, Menu, Search, X } from "lucide-react";
 import { useState } from "react";
+import { LinkButton } from "@/components/common/button";
 
 const headerMenus = [
   {
@@ -82,12 +83,9 @@ export default function Header() {
               사이트 안내
             </button>
 
-            <Link
-              href="/products/new"
-              className="rounded-full bg-[#6B8A58] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#4F6843]"
-            >
-              글쓰기
-            </Link>
+            <LinkButton href="/products/new" size="sm" className="px-5">
+              상품 등록
+            </LinkButton>
 
             <button
               type="button"

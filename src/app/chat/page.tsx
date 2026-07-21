@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { MessageCircle, ArrowRight, Clock, ShieldCheck, Wifi } from "lucide-react";
 import PageLayout from "@/components/common/PageLayout";
 import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
 import SectionHeader from "@/components/common/SectionHeader";
 import SectionCard from "@/components/common/SectionCard";
+import LinkButton from "@/components/common/button/LinkButton";
 
 const plannedFeatures = [
   {
@@ -32,20 +32,14 @@ export default function ChatPage() {
         className="overflow-hidden"
         bottom={
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/products"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#6B8A58] px-6 text-sm font-semibold text-white transition hover:bg-[#4F6843]"
-            >
+            <LinkButton href="/products">
               상품 둘러보기
               <ArrowRight size={18} />
-            </Link>
+            </LinkButton>
 
-            <Link
-              href="/"
-              className="inline-flex h-12 items-center justify-center rounded-full border border-[#D5D5D5] bg-white px-6 text-sm font-semibold text-[#333333] transition hover:bg-[#FAFAF8]"
-            >
+            <LinkButton href="/" variant="outline">
               홈으로 이동
-            </Link>
+            </LinkButton>
           </div>
         }
       >

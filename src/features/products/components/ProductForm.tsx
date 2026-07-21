@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Camera, ChevronDown, ImagePlus, Save, Trash2, X } from "lucide-react";
 import { categories } from "@/constants/categories";
@@ -15,6 +14,7 @@ import type {
 import { validateProductForm } from "@/features/products/utils/validate-product-form";
 import SectionHeader from "@/components/common/SectionHeader";
 import SectionCard from "@/components/common/SectionCard";
+import LinkButton from "@/components/common/button/LinkButton";
 
 type ProductFormProps = {
   mode: ProductFormMode;
@@ -454,12 +454,15 @@ export default function ProductForm({
             </button>
           )}
 
-          <Link
+          <LinkButton
             href={cancelHref}
-            className="flex h-12 w-24 shrink-0 items-center justify-center rounded-2xl border border-[#D5D5D5] bg-white text-sm font-semibold text-[#333333] transition hover:bg-[#FAFAF8]"
+            variant="outline"
+            size="lg"
+            radius="2xl"
+            className="w-24 shrink-0"
           >
             취소
-          </Link>
+          </LinkButton>
 
           <button
             type="submit"

@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import { ChevronDown, Search, SlidersHorizontal } from "lucide-react";
 import EmptyState from "@/components/common/EmptyState";
 import ProductCard from "@/components/product/ProductCard";
@@ -13,6 +12,7 @@ import PageLayout from "@/components/common/PageLayout";
 import PageTitle from "@/components/common/PageTitle";
 import HeroCard from "@/components/common/HeroCard";
 import SectionCard from "@/components/common/SectionCard";
+import LinkButton from "@/components/common/button/LinkButton";
 
 const statusOptions = [
   {
@@ -105,14 +105,7 @@ export default function ProductsPage() {
   return (
     <PageLayout>
       <HeroCard
-        aside={
-          <Link
-            href="/products/new"
-            className="flex h-12 items-center justify-center rounded-full bg-[#6B8A58] px-6 text-sm font-semibold text-white transition hover:bg-[#4F6843]"
-          >
-            상품 등록하기
-          </Link>
-        }
+        aside={<LinkButton href="/products/new">상품 등록하기</LinkButton>}
         bottom={
           <div className="flex h-12 items-center gap-2 rounded-2xl border border-[#E6E6E6] bg-[#FAFAF8] px-4">
             <Search size={19} className="shrink-0 text-[#777777]" />

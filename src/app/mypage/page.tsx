@@ -19,6 +19,7 @@ import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
 import SectionCard from "@/components/common/SectionCard";
 import StatCard from "@/components/common/StatCard";
+import LinkButton from "@/components/common/button/LinkButton";
 
 const menuItems = [
   {
@@ -59,12 +60,9 @@ export default function MyPage() {
         className="overflow-hidden"
         contentClassName="gap-6 md:items-center"
         aside={
-          <Link
-            href="/login"
-            className="inline-flex h-11 items-center justify-center rounded-full border border-[#D5D5D5] bg-white px-5 text-sm font-semibold text-[#333333] transition hover:bg-[#FAFAF8]"
-          >
+          <LinkButton href="/login" variant="outline">
             프로필 수정
-          </Link>
+          </LinkButton>
         }
       >
         <div className="flex items-center gap-4">
@@ -133,6 +131,7 @@ export default function MyPage() {
             </Link>
           }
         />
+
         {myProducts.length > 0 ? (
           <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
             {myProducts.map((product) => (
@@ -151,12 +150,9 @@ export default function MyPage() {
               판매할 물건이 있다면 상품을 등록해보세요.
             </p>
 
-            <Link
-              href="/products/new"
-              className="mt-5 inline-flex h-11 items-center justify-center rounded-full bg-[#6B8A58] px-5 text-sm font-semibold text-white transition hover:bg-[#4F6843]"
-            >
+            <LinkButton href="/products/new" className="mt-5">
               상품 등록하기
-            </Link>
+            </LinkButton>
           </div>
         )}
       </SectionCard>

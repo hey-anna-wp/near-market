@@ -1,12 +1,11 @@
 import Link from "next/link";
 import { ArrowRight, MapPin, Plus } from "lucide-react";
-import Header from "@/components/common/Header";
-import BottomNavigation from "@/components/common/BottomNavigation";
 import ProductCard from "@/components/product/ProductCard";
 import { categories } from "@/constants/categories";
 import { mockProducts } from "@/mocks/products";
 import SectionHeader from "@/components/common/SectionHeader";
 import PageLayout from "@/components/common/PageLayout";
+import LinkButton from "@/components/common/button/LinkButton";
 
 export default function HomePage() {
   const popularProducts = mockProducts.slice(0, 4);
@@ -32,19 +31,11 @@ export default function HomePage() {
           </p>
 
           <div className="mt-6 flex gap-3">
-            <Link
-              href="/products"
-              className="flex h-12 items-center justify-center rounded-full bg-[#6B8A58] px-6 text-sm font-semibold text-white transition hover:bg-[#4F6843]"
-            >
-              상품 둘러보기
-            </Link>
+            <LinkButton href="/products">상품 둘러보기</LinkButton>
 
-            <Link
-              href="/products/new"
-              className="flex h-12 items-center justify-center rounded-full border border-[#D5D5D5] bg-white px-6 text-sm font-semibold text-[#333333] transition hover:bg-[#FAFAF8]"
-            >
+            <LinkButton href="/products/new" variant="outline">
               판매하기
-            </Link>
+            </LinkButton>
           </div>
         </div>
 

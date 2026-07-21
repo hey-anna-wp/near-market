@@ -20,6 +20,7 @@ import { formatDate, formatPrice } from "@/lib/format";
 import PageLayout from "@/components/common/PageLayout";
 import SectionHeader from "@/components/common/SectionHeader";
 import SectionCard from "@/components/common/SectionCard";
+import LinkButton from "@/components/common/button/LinkButton";
 
 type ProductDetailPageProps = {
   params: Promise<{
@@ -178,13 +179,16 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         />
 
         <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-3">
-          <Link
+          <LinkButton
             href={`/products/${product.id}/edit`}
-            className="flex h-12 items-center justify-center gap-2 rounded-xl border border-[#D5D5D5] bg-white text-sm font-semibold text-[#333333] transition hover:bg-[#FAFAF8]"
+            variant="outline"
+            size="lg"
+            radius="xl"
+            fullWidth
           >
             <Pencil size={18} />
             수정하기
-          </Link>
+          </LinkButton>
 
           <button
             type="button"
