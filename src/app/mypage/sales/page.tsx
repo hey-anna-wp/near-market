@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { ArrowLeft, ChevronDown, Package, Pencil, Plus, Search, Trash2 } from "lucide-react";
+import { ArrowLeft, Package, Pencil, Plus, Search, Trash2 } from "lucide-react";
 import EmptyState from "@/components/common/EmptyState";
 import ProductCard from "@/components/product/ProductCard";
 import type { ProductStatus } from "@/features/products/types/product";
@@ -14,6 +14,7 @@ import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
 import StatCard from "@/components/common/StatCard";
 import { Button, LinkButton } from "@/components/common/button";
+import { SelectField } from "@/components/common/input";
 
 const statusOptions = [
   {
@@ -194,43 +195,21 @@ export default function MySalesPage() {
           </div>
 
           <div className="grid grid-cols-2 gap-3 md:flex">
-            <div className="relative">
-              <select
-                value={selectedStatus}
-                onChange={(event) => setSelectedStatus(event.target.value as StatusFilter)}
-                className="h-12 w-full appearance-none rounded-2xl border border-[#E6E6E6] bg-white px-4 pr-10 text-sm font-medium text-[#333333] outline-none focus:border-[#6B8A58] md:w-[150px]"
-              >
-                {statusOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+            <SelectField
+              value={selectedStatus}
+              options={statusOptions}
+              onChange={setSelectedStatus}
+              radius="2xl"
+              className="md:w-[150px]"
+            />
 
-              <ChevronDown
-                size={18}
-                className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-[#777777]"
-              />
-            </div>
-
-            <div className="relative">
-              <select
-                value={selectedSort}
-                onChange={(event) => setSelectedSort(event.target.value as SortOption)}
-                className="h-12 w-full appearance-none rounded-2xl border border-[#E6E6E6] bg-white px-4 pr-10 text-sm font-medium text-[#333333] outline-none focus:border-[#6B8A58] md:w-[150px]"
-              >
-                {sortOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-
-              <ChevronDown
-                size={18}
-                className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-[#777777]"
-              />
-            </div>
+            <SelectField
+              value={selectedSort}
+              options={sortOptions}
+              onChange={setSelectedSort}
+              radius="2xl"
+              className="md:w-[150px]"
+            />
           </div>
         </div>
 

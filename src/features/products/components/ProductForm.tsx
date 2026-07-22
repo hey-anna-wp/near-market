@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Camera, ChevronDown, ImagePlus, Save, Trash2, X } from "lucide-react";
+import { Camera, ImagePlus, Save, Trash2, X } from "lucide-react";
 import { categories } from "@/constants/categories";
 import type { Product, ProductStatus } from "@/features/products/types/product";
 import type {
@@ -15,6 +15,7 @@ import { validateProductForm } from "@/features/products/utils/validate-product-
 import SectionHeader from "@/components/common/SectionHeader";
 import SectionCard from "@/components/common/SectionCard";
 import { Button, LinkButton } from "@/components/common/button";
+import { SelectField } from "@/components/common/input";
 
 type ProductFormProps = {
   mode: ProductFormMode;
@@ -43,6 +44,17 @@ const statusOptions: {
 ];
 
 const productCategories = categories.filter((category) => category !== "전체");
+
+const categoryOptions = [
+  {
+    label: "카테고리를 선택해주세요",
+    value: "",
+  },
+  ...productCategories.map((category) => ({
+    label: category,
+    value: category,
+  })),
+];
 
 const defaultFormValues: ProductFormValues = {
   title: "",
@@ -293,31 +305,14 @@ export default function ProductForm({
           </div>
 
           <div>
-            <label htmlFor="category" className="mb-2 block text-sm font-semibold text-[#333333]">
-              카테고리
-            </label>
-
-            <div className="relative">
-              <select
-                id="category"
-                value={formValues.category}
-                onChange={(event) => handleInputChange("category", event.target.value)}
-                className="h-12 w-full appearance-none rounded-xl border border-[#E6E6E6] bg-white px-4 pr-10 text-sm outline-none focus:border-[#6B8A58]"
-              >
-                <option value="">카테고리를 선택해주세요</option>
-
-                {productCategories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-
-              <ChevronDown
-                size={18}
-                className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-[#777777]"
-              />
-            </div>
+            <SelectField
+              label="카테고리"
+              labelVariant="form"
+              value={formValues.category}
+              options={categoryOptions}
+              onChange={(value) => handleInputChange("category", value)}
+              selectClassName="font-normal"
+            />
 
             {errors.category && <p className="mt-2 text-sm text-[#E5484D]">{errors.category}</p>}
           </div>
@@ -364,31 +359,14 @@ export default function ProductForm({
           </div>
 
           {isEditMode && (
-            <div>
-              <label htmlFor="status" className="mb-2 block text-sm font-semibold text-[#333333]">
-                거래 상태
-              </label>
-
-              <div className="relative">
-                <select
-                  id="status"
-                  value={formValues.status}
-                  onChange={(event) => handleStatusChange(event.target.value as ProductStatus)}
-                  className="h-12 w-full appearance-none rounded-xl border border-[#E6E6E6] bg-white px-4 pr-10 text-sm outline-none focus:border-[#6B8A58]"
-                >
-                  {statusOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-
-                <ChevronDown
-                  size={18}
-                  className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-[#777777]"
-                />
-              </div>
-            </div>
+            <SelectField
+              label="거래 상태"
+              labelVariant="form"
+              value={formValues.status}
+              options={statusOptions}
+              onChange={handleStatusChange}
+              selectClassName="font-normal"
+            />
           )}
 
           <div>

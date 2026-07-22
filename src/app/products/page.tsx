@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ChevronDown, Search, SlidersHorizontal } from "lucide-react";
+import { Search, SlidersHorizontal } from "lucide-react";
 import EmptyState from "@/components/common/EmptyState";
 import ProductCard from "@/components/product/ProductCard";
 import { categories } from "@/constants/categories";
@@ -13,6 +13,7 @@ import PageTitle from "@/components/common/PageTitle";
 import HeroCard from "@/components/common/HeroCard";
 import SectionCard from "@/components/common/SectionCard";
 import { Button, LinkButton } from "@/components/common/button";
+import { SelectField } from "@/components/common/input";
 
 const statusOptions = [
   {
@@ -155,51 +156,19 @@ export default function ProductsPage() {
         </div>
 
         <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2">
-          <div>
-            <p className="mb-2 text-xs font-semibold text-[#777777]">거래 상태</p>
+          <SelectField
+            label="거래 상태"
+            value={selectedStatus}
+            options={statusOptions}
+            onChange={setSelectedStatus}
+          />
 
-            <div className="relative">
-              <select
-                value={selectedStatus}
-                onChange={(event) => setSelectedStatus(event.target.value as StatusFilter)}
-                className="h-12 w-full appearance-none rounded-xl border border-[#E6E6E6] bg-white px-4 pr-10 text-sm font-medium text-[#333333] outline-none focus:border-[#6B8A58]"
-              >
-                {statusOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-
-              <ChevronDown
-                size={18}
-                className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-[#777777]"
-              />
-            </div>
-          </div>
-
-          <div>
-            <p className="mb-2 text-xs font-semibold text-[#777777]">정렬</p>
-
-            <div className="relative">
-              <select
-                value={selectedSort}
-                onChange={(event) => setSelectedSort(event.target.value as SortOption)}
-                className="h-12 w-full appearance-none rounded-xl border border-[#E6E6E6] bg-white px-4 pr-10 text-sm font-medium text-[#333333] outline-none focus:border-[#6B8A58]"
-              >
-                {sortOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-
-              <ChevronDown
-                size={18}
-                className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-[#777777]"
-              />
-            </div>
-          </div>
+          <SelectField
+            label="정렬"
+            value={selectedSort}
+            options={sortOptions}
+            onChange={setSelectedSort}
+          />
         </div>
       </SectionCard>
 
