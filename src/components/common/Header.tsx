@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Bell, ChevronDown, CircleHelp, Menu, Search, X } from "lucide-react";
+import { Bell, ChevronDown, CircleHelp, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button, LinkButton } from "@/components/common/button";
+import { SearchInput } from "@/components/common/input";
 
 const headerMenus = [
   {
@@ -22,6 +23,7 @@ const headerMenus = [
 
 export default function Header() {
   const [isGuideOpen, setIsGuideOpen] = useState(false);
+  const [keyword, setKeyword] = useState("");
 
   const closeGuide = () => {
     setIsGuideOpen(false);
@@ -55,14 +57,13 @@ export default function Header() {
             </nav>
           </div>
           <div className="hidden flex-1 items-center justify-center px-8 md:flex">
-            <div className="flex h-11 w-full max-w-md items-center gap-2 rounded-full border border-[#E6E6E6] bg-white px-4">
-              <Search size={18} className="text-[#777777]" />
-              <input
-                type="text"
-                placeholder="어떤 물건을 찾고 있나요?"
-                className="w-full bg-transparent text-sm text-[#333333] outline-none placeholder:text-[#AAAAAA]"
-              />
-            </div>
+            <SearchInput
+              value=""
+              onChange={() => {}}
+              placeholder="어떤 물건을 찾고 있나요?"
+              ariaLabel="상품 검색"
+              className="h-11 w-full max-w-md rounded-full bg-white"
+            />
           </div>
 
           <div className="hidden items-center gap-3 md:flex">
@@ -115,14 +116,13 @@ export default function Header() {
             <ChevronDown size={16} />
           </button>
 
-          <div className="flex h-11 flex-1 items-center gap-2 rounded-full border border-[#E6E6E6] bg-white px-4">
-            <Search size={18} className="text-[#777777]" />
-            <input
-              type="text"
-              placeholder="검색어를 입력하세요"
-              className="w-full bg-transparent text-sm outline-none placeholder:text-[#AAAAAA]"
-            />
-          </div>
+          <SearchInput
+            value={keyword}
+            onChange={(event) => setKeyword(event.target.value)}
+            placeholder="검색어를 입력하세요"
+            ariaLabel="상품 검색"
+            className="h-11 flex-1 rounded-full bg-white"
+          />
         </div>
       </header>
       {isGuideOpen && (

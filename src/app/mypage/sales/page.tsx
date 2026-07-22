@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { ArrowLeft, Package, Pencil, Plus, Search, Trash2 } from "lucide-react";
+import { ArrowLeft, Package, Pencil, Plus, Trash2 } from "lucide-react";
 import EmptyState from "@/components/common/EmptyState";
 import ProductCard from "@/components/product/ProductCard";
 import type { ProductStatus } from "@/features/products/types/product";
@@ -14,7 +14,7 @@ import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
 import StatCard from "@/components/common/StatCard";
 import { Button, LinkButton } from "@/components/common/button";
-import { SelectField } from "@/components/common/input";
+import { SearchInput, SelectField } from "@/components/common/input";
 
 const statusOptions = [
   {
@@ -182,17 +182,13 @@ export default function MySalesPage() {
 
       <section className="mt-6 rounded-[24px] border border-[#E6E6E6] bg-white p-4 md:p-5">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div className="flex h-12 flex-1 items-center gap-2 rounded-2xl border border-[#E6E6E6] bg-[#FAFAF8] px-4">
-            <Search size={19} className="shrink-0 text-[#777777]" />
-
-            <input
-              type="text"
-              value={keyword}
-              onChange={(event) => setKeyword(event.target.value)}
-              placeholder="내 판매글 검색"
-              className="w-full bg-transparent text-sm text-[#333333] outline-none placeholder:text-[#AAAAAA]"
-            />
-          </div>
+          <SearchInput
+            value={keyword}
+            onChange={(event) => setKeyword(event.target.value)}
+            placeholder="내 판매글 검색"
+            ariaLabel="내 판매글 검색"
+            className="flex-1"
+          />
 
           <div className="grid grid-cols-2 gap-3 md:flex">
             <SelectField

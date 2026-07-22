@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search, SlidersHorizontal } from "lucide-react";
+import { SlidersHorizontal } from "lucide-react";
 import EmptyState from "@/components/common/EmptyState";
 import ProductCard from "@/components/product/ProductCard";
 import { categories } from "@/constants/categories";
@@ -13,7 +13,7 @@ import PageTitle from "@/components/common/PageTitle";
 import HeroCard from "@/components/common/HeroCard";
 import SectionCard from "@/components/common/SectionCard";
 import { Button, LinkButton } from "@/components/common/button";
-import { SelectField } from "@/components/common/input";
+import { SearchInput, SelectField } from "@/components/common/input";
 
 const statusOptions = [
   {
@@ -108,17 +108,12 @@ export default function ProductsPage() {
       <HeroCard
         aside={<LinkButton href="/products/new">상품 등록하기</LinkButton>}
         bottom={
-          <div className="flex h-12 items-center gap-2 rounded-2xl border border-[#E6E6E6] bg-[#FAFAF8] px-4">
-            <Search size={19} className="shrink-0 text-[#777777]" />
-
-            <input
-              type="text"
-              value={keyword}
-              onChange={(event) => setKeyword(event.target.value)}
-              placeholder="상품명, 설명, 지역으로 검색"
-              className="w-full bg-transparent text-sm text-[#333333] outline-none placeholder:text-[#AAAAAA]"
-            />
-          </div>
+          <SearchInput
+            value={keyword}
+            onChange={(event) => setKeyword(event.target.value)}
+            placeholder="상품명, 설명, 지역으로 검색"
+            ariaLabel="상품 검색"
+          />
         }
       >
         <PageTitle
