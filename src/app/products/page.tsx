@@ -1,12 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SlidersHorizontal } from "lucide-react";
 import EmptyState from "@/components/common/EmptyState";
 import ProductCard from "@/components/product/ProductCard";
 import { categories } from "@/constants/categories";
-import { mockProducts } from "@/mocks/products";
-import type { ProductStatus } from "@/features/products/types/product";
+import { getProducts } from "@/features/products/api/products.service";
+import type { Product, ProductStatus } from "@/features/products/types/product";
 import SectionHeader from "@/components/common/SectionHeader";
 import PageLayout from "@/components/common/PageLayout";
 import PageTitle from "@/components/common/PageTitle";
@@ -57,13 +57,37 @@ type StatusFilter = "all" | ProductStatus;
 type SortOption = (typeof sortOptions)[number]["value"];
 
 export default function ProductsPage() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const [keyword, setKeyword] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("전체");
   const [selectedStatus, setSelectedStatus] = useState<StatusFilter>("all");
   const [selectedSort, setSelectedSort] = useState<SortOption>("recent");
 
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        setIsLoading(true);
+        setErrorMessage("");
+
+        const data = await getProducts();
+
+        setProducts(data);
+      } catch (error) {
+        console.error(error);
+        setErrorMessage("상품 목록을 불러오지 못했습니다.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
   const filteredProducts = useMemo(() => {
-    const filtered = mockProducts.filter((product) => {
+    const filtered = products.filter((product) => {
       const matchesKeyword =
         product.title.toLowerCase().includes(keyword.toLowerCase()) ||
         product.description.toLowerCase().includes(keyword.toLowerCase()) ||
@@ -91,7 +115,7 @@ export default function ProductsPage() {
 
       return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
-  }, [keyword, selectedCategory, selectedStatus, selectedSort]);
+  }, [products, keyword, selectedCategory, selectedStatus, selectedSort]);
 
   const hasFilter =
     keyword || selectedCategory !== "전체" || selectedStatus !== "all" || selectedSort !== "recent";
@@ -180,7 +204,11 @@ export default function ProductsPage() {
           }
         />
 
-        {filteredProducts.length > 0 ? (
+        {isLoading ? (
+          <p className="mt-5 text-sm text-[#777777]">상품을 불러오는 중이에요.</p>
+        ) : errorMessage ? (
+          <EmptyState title="상품 목록을 불러오지 못했어요" description={errorMessage} />
+        ) : filteredProducts.length > 0 ? (
           <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
