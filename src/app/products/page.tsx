@@ -2,18 +2,21 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { SlidersHorizontal } from "lucide-react";
+
 import EmptyState from "@/components/common/EmptyState";
-import ProductCard from "@/components/product/ProductCard";
-import { categories } from "@/constants/categories";
-import { getProducts } from "@/features/products/api/products.service";
-import type { Product, ProductStatus } from "@/features/products/types/product";
-import SectionHeader from "@/components/common/SectionHeader";
+import HeroCard from "@/components/common/HeroCard";
 import PageLayout from "@/components/common/PageLayout";
 import PageTitle from "@/components/common/PageTitle";
-import HeroCard from "@/components/common/HeroCard";
 import SectionCard from "@/components/common/SectionCard";
+import SectionHeader from "@/components/common/SectionHeader";
 import { Button, LinkButton } from "@/components/common/button";
 import { SearchInput, SelectField } from "@/components/common/input";
+import ProductCard from "@/components/product/ProductCard";
+
+import { getProducts } from "@/features/products/api/products.service";
+import type { Product, ProductStatus } from "@/features/products/types/product";
+
+import { categories } from "@/constants/categories";
 
 const statusOptions = [
   {
@@ -87,11 +90,13 @@ export default function ProductsPage() {
   }, []);
 
   const filteredProducts = useMemo(() => {
+    const normalizedKeyword = keyword.toLowerCase();
+
     const filtered = products.filter((product) => {
       const matchesKeyword =
-        product.title.toLowerCase().includes(keyword.toLowerCase()) ||
-        product.description.toLowerCase().includes(keyword.toLowerCase()) ||
-        product.location.toLowerCase().includes(keyword.toLowerCase());
+        product.title.toLowerCase().includes(normalizedKeyword) ||
+        product.description.toLowerCase().includes(normalizedKeyword) ||
+        product.location.toLowerCase().includes(normalizedKeyword);
 
       const matchesCategory = selectedCategory === "전체" || product.category === selectedCategory;
 
@@ -118,7 +123,10 @@ export default function ProductsPage() {
   }, [products, keyword, selectedCategory, selectedStatus, selectedSort]);
 
   const hasFilter =
-    keyword || selectedCategory !== "전체" || selectedStatus !== "all" || selectedSort !== "recent";
+    Boolean(keyword) ||
+    selectedCategory !== "전체" ||
+    selectedStatus !== "all" ||
+    selectedSort !== "recent";
 
   const resetFilters = () => {
     setKeyword("");
