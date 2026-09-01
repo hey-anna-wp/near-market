@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { SlidersHorizontal } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 
 import EmptyState from "@/components/common/EmptyState";
 import HeroCard from "@/components/common/HeroCard";
@@ -14,7 +15,7 @@ import { SearchInput, SelectField } from "@/components/common/input";
 import ProductCard from "@/components/product/ProductCard";
 
 import { getProducts } from "@/features/products/api/products.service";
-import type { Product, ProductStatus } from "@/features/products/types/product";
+import type { ProductStatus } from "@/features/products/types/product";
 
 import { categories } from "@/constants/categories";
 
@@ -60,34 +61,19 @@ type StatusFilter = "all" | ProductStatus;
 type SortOption = (typeof sortOptions)[number]["value"];
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
-
   const [keyword, setKeyword] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("전체");
   const [selectedStatus, setSelectedStatus] = useState<StatusFilter>("all");
   const [selectedSort, setSelectedSort] = useState<SortOption>("recent");
 
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        setIsLoading(true);
-        setErrorMessage("");
-
-        const data = await getProducts();
-
-        setProducts(data);
-      } catch (error) {
-        console.error(error);
-        setErrorMessage("상품 목록을 불러오지 못했습니다.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadProducts();
-  }, []);
+  const {
+    data: products = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: getProducts,
+  });
 
   const filteredProducts = useMemo(() => {
     const normalizedKeyword = keyword.toLowerCase();
@@ -214,8 +200,11 @@ export default function ProductsPage() {
 
         {isLoading ? (
           <p className="mt-5 text-sm text-[#777777]">상품을 불러오는 중이에요.</p>
-        ) : errorMessage ? (
-          <EmptyState title="상품 목록을 불러오지 못했어요" description={errorMessage} />
+        ) : isError ? (
+          <EmptyState
+            title="상품 목록을 불러오지 못했어요"
+            description="잠시 후 다시 시도해 주세요."
+          />
         ) : filteredProducts.length > 0 ? (
           <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
             {filteredProducts.map((product) => (
