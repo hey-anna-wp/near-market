@@ -1,0 +1,263 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import {
+  ArrowLeft,
+  CalendarDays,
+  Heart,
+  MapPin,
+  MessageCircle,
+  MoreVertical,
+  Pencil,
+  ShieldCheck,
+  Trash2,
+  User,
+} from "lucide-react";
+
+import EmptyState from "@/components/common/EmptyState";
+import PageLayout from "@/components/common/PageLayout";
+import SectionCard from "@/components/common/SectionCard";
+import SectionHeader from "@/components/common/SectionHeader";
+import { Button, LinkButton } from "@/components/common/button";
+import ProductCard from "@/components/product/ProductCard";
+import ProductStatusBadge from "@/components/product/ProductStatusBadge";
+
+import { getProductById, getProducts } from "@/features/products/api/products.service";
+
+import { formatDate, formatPrice } from "@/lib/format";
+
+type ProductDetailProps = {
+  productId: string;
+};
+
+export default function ProductDetail({ productId }: ProductDetailProps) {
+  const {
+    data: product,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["products", productId],
+    queryFn: () => getProductById(productId),
+  });
+
+  const { data: products = [] } = useQuery({
+    queryKey: ["products"],
+    queryFn: getProducts,
+  });
+
+  if (isLoading) {
+    return (
+      <PageLayout>
+        <p className="text-sm text-[#777777]">상품 정보를 불러오는 중이에요.</p>
+      </PageLayout>
+    );
+  }
+
+  if (isError || !product) {
+    return (
+      <PageLayout>
+        <EmptyState
+          title="상품 정보를 불러오지 못했어요"
+          description="상품이 존재하지 않거나 데이터를 불러오는 중 문제가 발생했습니다."
+        />
+      </PageLayout>
+    );
+  }
+
+  const relatedProducts = products.filter((item) => item.id !== product.id).slice(0, 4);
+
+  return (
+    <PageLayout>
+      <div className="mb-4 flex items-center justify-between md:mb-6">
+        <Link
+          href="/products"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-[#555555] transition hover:text-[#333333]"
+        >
+          <ArrowLeft size={18} />
+          상품 목록으로
+        </Link>
+
+        <button
+          type="button"
+          aria-label="더보기"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E6E6E6] bg-white text-[#777777] md:hidden"
+        >
+          <MoreVertical size={20} />
+        </button>
+      </div>
+
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
+        <div className="overflow-hidden rounded-[28px] border border-[#E6E6E6] bg-white">
+          <div className="relative aspect-square bg-[#FAFAF8] md:aspect-[4/3]">
+            <Image
+              src={product.imageUrl}
+              alt={product.title}
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
+
+            <div className="absolute top-4 left-4">
+              <ProductStatusBadge status={product.status} />
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-[28px] border border-[#E6E6E6] bg-white p-5 md:p-7">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold text-[#6B8A58]">{product.category}</p>
+
+              <h1 className="mt-2 text-[26px] leading-9 font-bold tracking-[-0.04em] text-[#333333] md:text-[34px] md:leading-[44px]">
+                {product.title}
+              </h1>
+            </div>
+
+            <button
+              type="button"
+              aria-label="관심 상품"
+              className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#E6E6E6] bg-white text-[#777777] transition hover:text-[#E5484D] md:flex"
+            >
+              <Heart size={22} />
+            </button>
+          </div>
+
+          <p className="mt-4 text-[28px] font-bold tracking-[-0.04em] text-[#333333]">
+            {formatPrice(product.price)}원
+          </p>
+
+          <div className="mt-5 grid grid-cols-1 gap-3 rounded-2xl bg-[#FAFAF8] p-4 text-sm text-[#555555]">
+            <div className="flex items-center gap-2">
+              <MapPin size={18} className="text-[#6B8A58]" />
+              <span>{product.location}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <CalendarDays size={18} className="text-[#6B8A58]" />
+              <span>{formatDate(product.createdAt)} 등록</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Heart size={18} className="text-[#6B8A58]" />
+              <span>관심 {product.likeCount}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <MessageCircle size={18} className="text-[#6B8A58]" />
+              <span>문의 {product.chatCount}</span>
+            </div>
+          </div>
+
+          <div className="mt-6 rounded-2xl border border-[#E6E6E6] p-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#EDF3E9] text-[#4F6843]">
+                <User size={22} />
+              </div>
+
+              <div className="min-w-0 flex-1">
+                <p className="font-semibold text-[#333333]">{product.sellerName}</p>
+                <p className="mt-1 text-xs text-[#777777]">{product.location} 이웃</p>
+              </div>
+
+              <div className="flex items-center gap-1 rounded-full bg-[#EDF3E9] px-3 py-1.5 text-xs font-semibold text-[#4F6843]">
+                <ShieldCheck size={14} />
+                인증
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 hidden gap-3 md:flex">
+            <Button variant="outline" size="lg" radius="2xl" className="h-13 flex-1">
+              <Heart size={19} />
+              관심
+            </Button>
+
+            <Button radius="2xl" className="h-13 flex-[1.4]">
+              <MessageCircle size={19} />
+              문의하기
+            </Button>
+          </div>
+
+          <div className="mt-4 hidden rounded-2xl bg-[#FFF1E3] px-4 py-3 text-sm leading-6 text-[#9A5A23] md:block">
+            현재는 더미데이터 단계라 문의 기능은 연결되지 않았습니다. 추후 로그인과 Supabase 연동 후
+            채팅 또는 문의 기능으로 확장할 예정입니다.
+          </div>
+        </div>
+      </section>
+
+      <SectionCard>
+        <SectionHeader title="상품 설명" />
+        <p className="mt-2 text-sm leading-7 whitespace-pre-line text-[#555555] md:text-base md:leading-8">
+          {product.description}
+        </p>
+      </SectionCard>
+
+      <SectionCard>
+        <SectionHeader
+          title="판매자 관리 영역"
+          description="로그인 후 본인이 등록한 상품일 경우 수정, 삭제, 거래 상태 변경 버튼을 노출할 예정입니다."
+        />
+
+        <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-3">
+          <LinkButton
+            href={`/products/${product.id}/edit`}
+            variant="outline"
+            size="lg"
+            radius="xl"
+            fullWidth
+          >
+            <Pencil size={18} />
+            수정하기
+          </LinkButton>
+
+          <Button variant="outline" size="lg" radius="xl" fullWidth>
+            거래 상태 변경
+          </Button>
+
+          <Button variant="dangerOutline" size="lg" radius="xl" fullWidth>
+            <Trash2 size={18} />
+            삭제하기
+          </Button>
+        </div>
+      </SectionCard>
+
+      {relatedProducts.length > 0 && (
+        <section className="mt-8 md:mt-12">
+          <SectionHeader
+            title="비슷한 상품"
+            description="같은 동네에서 올라온 다른 상품도 확인해보세요."
+          />
+
+          <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+            {relatedProducts.map((item) => (
+              <ProductCard key={item.id} product={item} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <div className="fixed right-0 bottom-0 left-0 z-50 border-t border-[#E6E6E6] bg-white p-4 md:hidden">
+        <div className="mx-auto flex max-w-md gap-3">
+          <Button
+            variant="outline"
+            size="lg"
+            radius="2xl"
+            iconOnly
+            aria-label="관심 상품"
+            className="w-14 shrink-0"
+          >
+            <Heart size={22} className="shrink-0" />
+          </Button>
+
+          <Button size="lg" radius="2xl" className="flex-1">
+            <MessageCircle size={19} />
+            문의하기
+          </Button>
+        </div>
+      </div>
+    </PageLayout>
+  );
+}
