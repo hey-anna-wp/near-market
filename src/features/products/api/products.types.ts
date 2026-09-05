@@ -16,3 +16,17 @@ export type ProductRow = {
   created_at: string;
   updated_at: string;
 };
+
+export type CreateProductRow = {
+  title: string;
+  description: string;
+  price: number;
+  category: string;
+  location: string;
+  status: Product["status"];
+  image_url: string;
+  seller_id: string;
+  seller_name: string;
+  like_count: number;
+  chat_count: number;
+};

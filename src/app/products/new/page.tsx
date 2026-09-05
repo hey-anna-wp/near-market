@@ -7,18 +7,13 @@ import type { ProductFormSubmitValues } from "@/features/products/types/product-
 import PageLayout from "@/components/common/PageLayout";
 import HeroCard from "@/components/common/HeroCard";
 import PageTitle from "@/components/common/PageTitle";
+import { useCreateProduct } from "@/features/products/hooks/useCreateProduct";
 
 export default function ProductNewPage() {
+  const createProductMutation = useCreateProduct();
+
   const handleCreateProduct = (values: ProductFormSubmitValues) => {
-    // const submitData = {
-    //   ...values,
-    //   status: "selling" as const,
-    // };
-
-    // console.log("상품 등록 데이터:", submitData);
-    console.log("상품 등록 데이터:", values);
-
-    alert("현재는 더미 UI 단계입니다. 콘솔에서 등록 데이터를 확인해주세요.");
+    createProductMutation.mutate(values);
   };
 
   return (
@@ -46,7 +41,11 @@ export default function ProductNewPage() {
         />
       </HeroCard>
 
-      <ProductForm mode="create" onSubmit={handleCreateProduct} />
+      <ProductForm
+        mode="create"
+        onSubmit={handleCreateProduct}
+        isSubmitting={createProductMutation.isPending}
+      />
     </PageLayout>
   );
 }
