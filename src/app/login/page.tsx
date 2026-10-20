@@ -1,8 +1,12 @@
 "use client";
 
+import { useState, type SubmitEvent } from "react";
 import Link from "next/link";
-import { useState } from "react";
+
 import { ArrowLeft, Eye, EyeOff, Lock, Mail, MapPin, ShieldCheck, UserPlus } from "lucide-react";
+
+import { supabase } from "@/lib/supabase/client";
+
 import PageLayout from "@/components/common/PageLayout";
 import PageTitle from "@/components/common/PageTitle";
 import Button from "@/components/common/button/Button";
@@ -24,6 +28,7 @@ export default function LoginPage() {
   const [errors, setErrors] = useState<LoginFormErrors>({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isSignupMode, setIsSignupMode] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (field: keyof LoginFormValues, value: string) => {
     setFormValues((prev) => ({
@@ -57,20 +62,43 @@ export default function LoginPage() {
     return Object.keys(nextErrors).length === 0;
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const isValid = validateForm();
+    if (isSubmitting || !validateForm()) return;
 
-    if (!isValid) return;
+    // 로그인 기능은 다음 단계에서 구현
+    if (!isSignupMode) {
+      alert("로그인은 아직 준비 중입니다.");
+      return;
+    }
 
-    console.log(isSignupMode ? "회원가입 데이터:" : "로그인 데이터:", formValues);
+    setIsSubmitting(true);
 
-    alert(
-      isSignupMode
-        ? "현재는 더미 UI 단계입니다. 회원가입 데이터는 콘솔에서 확인해주세요."
-        : "현재는 더미 UI 단계입니다. 로그인 데이터는 콘솔에서 확인해주세요.",
-    );
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: formValues.email.trim(),
+        password: formValues.password,
+      });
+
+      if (error) throw error;
+
+      if (!data.user) {
+        throw new Error("회원가입 결과를 확인할 수 없습니다.");
+      }
+
+      alert(
+        data.session
+          ? "회원가입이 완료되었습니다."
+          : "회원가입 요청이 완료되었습니다. 이메일 인증이 필요하다면 메일을 확인해주세요.",
+      );
+
+      setFormValues(initialFormValues);
+    } catch (error) {
+      alert(error instanceof Error ? error.message : "회원가입에 실패했습니다.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -216,8 +244,8 @@ export default function LoginPage() {
             </div>
           )}
 
-          <Button type="submit" size="lg" radius="2xl" fullWidth>
-            {isSignupMode ? "회원가입하기" : "로그인하기"}
+          <Button type="submit" size="lg" radius="2xl" fullWidth disabled={isSubmitting}>
+            {isSubmitting ? "처리 중..." : isSignupMode ? "회원가입하기" : "로그인하기"}
           </Button>
         </form>
 
