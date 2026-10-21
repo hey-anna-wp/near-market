@@ -2,6 +2,7 @@
 
 import { useState, type SubmitEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { ArrowLeft, Eye, EyeOff, Lock, Mail, MapPin, ShieldCheck, UserPlus } from "lucide-react";
 
@@ -24,6 +25,8 @@ const initialFormValues: LoginFormValues = {
 };
 
 export default function LoginPage() {
+  const router = useRouter();
+
   const [formValues, setFormValues] = useState<LoginFormValues>(initialFormValues);
   const [errors, setErrors] = useState<LoginFormErrors>({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -67,35 +70,52 @@ export default function LoginPage() {
 
     if (isSubmitting || !validateForm()) return;
 
-    // 로그인 기능은 다음 단계에서 구현
-    if (!isSignupMode) {
-      alert("로그인은 아직 준비 중입니다.");
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
-      const { data, error } = await supabase.auth.signUp({
-        email: formValues.email.trim(),
-        password: formValues.password,
-      });
+      const email = formValues.email.trim();
+      const password = formValues.password;
 
-      if (error) throw error;
+      if (isSignupMode) {
+        // 회원가입
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password,
+        });
 
-      if (!data.user) {
-        throw new Error("회원가입 결과를 확인할 수 없습니다.");
+        if (error) throw error;
+
+        if (!data.user) {
+          throw new Error("회원가입 결과를 확인할 수 없습니다.");
+        }
+
+        alert(
+          data.session
+            ? "회원가입이 완료되었습니다."
+            : "회원가입 요청이 완료되었습니다. 이메일 인증이 필요하다면 메일을 확인해주세요.",
+        );
+      } else {
+        // 로그인
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+        if (error) throw error;
+
+        alert("로그인에 성공했습니다.");
+        router.push("/");
+        router.refresh();
       }
-
-      alert(
-        data.session
-          ? "회원가입이 완료되었습니다."
-          : "회원가입 요청이 완료되었습니다. 이메일 인증이 필요하다면 메일을 확인해주세요.",
-      );
 
       setFormValues(initialFormValues);
     } catch (error) {
-      alert(error instanceof Error ? error.message : "회원가입에 실패했습니다.");
+      alert(
+        error instanceof Error
+          ? error.message
+          : isSignupMode
+            ? "회원가입에 실패했습니다."
+            : "로그인에 실패했습니다.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -253,8 +273,8 @@ export default function LoginPage() {
           <p className="text-sm font-semibold text-[#333333]">테스트 안내</p>
 
           <p className="mt-2 text-sm leading-6 text-[#777777]">
-            현재는 Supabase Auth 연결 전이라 실제 로그인은 되지 않습니다. 입력값 검증과 화면 흐름만
-            확인할 수 있습니다.
+            이메일과 비밀번호로 회원가입 및 로그인할 수 있습니다. 회원가입 후 이메일 인증이 필요할
+            수 있습니다.
           </p>
         </div>
 

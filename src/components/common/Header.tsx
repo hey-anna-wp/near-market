@@ -1,8 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { Bell, ChevronDown, CircleHelp, Menu, X } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { Bell, ChevronDown, CircleHelp, Menu, X } from "lucide-react";
+
+import { useAuth } from "@/features/auth/hooks/useAuth";
+
 import { Button, LinkButton } from "@/components/common/button";
 import { SearchInput } from "@/components/common/input";
 
@@ -22,11 +27,34 @@ const headerMenus = [
 ];
 
 export default function Header() {
+  const router = useRouter();
+
+  const { user, isLoading, signOut } = useAuth();
+
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [keyword, setKeyword] = useState("");
 
   const closeGuide = () => {
     setIsGuideOpen(false);
+  };
+
+  const handleLogout = async () => {
+    if (isLoggingOut) return;
+
+    setIsLoggingOut(true);
+
+    try {
+      await signOut();
+
+      alert("로그아웃되었습니다.");
+      router.push("/");
+      router.refresh();
+    } catch (error) {
+      alert(error instanceof Error ? error.message : "로그아웃에 실패했습니다.");
+    } finally {
+      setIsLoggingOut(false);
+    }
   };
 
   return (
@@ -87,6 +115,17 @@ export default function Header() {
             <LinkButton href="/products/new" size="sm" className="px-5">
               상품 등록
             </LinkButton>
+
+            {!isLoading &&
+              (user ? (
+                <Button size="sm" onClick={handleLogout} disabled={isLoggingOut}>
+                  {isLoggingOut ? "로그아웃 중..." : "로그아웃"}
+                </Button>
+              ) : (
+                <LinkButton href="/login" size="sm">
+                  로그인
+                </LinkButton>
+              ))}
 
             <button
               type="button"
